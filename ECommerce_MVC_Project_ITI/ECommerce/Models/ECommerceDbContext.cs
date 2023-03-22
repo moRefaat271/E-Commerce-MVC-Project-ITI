@@ -24,9 +24,15 @@ namespace ECommerce.Models
                 entity.HasNoKey();
 
             });
+            modelBuilder.Entity<RoleViewModel>(entity =>
+            {
+                entity.HasNoKey();
+
+            });
         }
         public DbSet<ECommerce.ViewModel.RegisterAccountViewModel> RegisterAccountViewModel { get; set; } = default!;
         public DbSet<ECommerce.ViewModel.LoginViewModel> LoginViewModel { get; set; } = default!;
+        public DbSet<ECommerce.ViewModel.RoleViewModel> RoleViewModel { get; set; } = default!;
         //our own dataset will be written here
     }
 }

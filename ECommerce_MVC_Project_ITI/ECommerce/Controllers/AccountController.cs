@@ -82,5 +82,42 @@ namespace ECommerce.Controllers
             await SignInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
+
+
+        public IActionResult RegisterAdmin()
+        {
+            return View("Register");
+        }
+        [HttpPost]
+        public async Task<IActionResult> RegisterAdmin(RegisterAccountViewModel newAccount)
+        {
+            if (ModelState.IsValid)
+            {
+                IdentityUser user = new IdentityUser();
+                user.UserName = newAccount.UserName;
+                user.Email = newAccount.Email;
+
+                IdentityResult result = await UserManager.CreateAsync(user, newAccount.Password);
+
+                if (result.Succeeded)
+                {
+                    //add user to admin role
+                    await UserManager.AddToRoleAsync(user, "Admin");
+                    
+
+                    await SignInManager.SignInAsync(user, false);
+                    return RedirectToAction("Index", "Profile");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View("Register", newAccount);
+        }
+
     }
 }
