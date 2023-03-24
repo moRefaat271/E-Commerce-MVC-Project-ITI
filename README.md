@@ -11,7 +11,7 @@ This project is an Amazon eCommerce website built with ASP.NET MVC Core 5. It fe
 This project was developed by ITI.
 
 ## Developers
-- Khaled Magdy [LinkedIn](https://www.linkedin.com/in/khaled-magdy/)
+- Khaled Magdy [LinkedIn](https://www.linkedin.com/in/khaled-magdy-81b8a318b/)
 - Muhammed Refaet [LinkedIn](https://www.linkedin.com/in/muhammed-refaet/)
 - Ahmed Fathy [LinkedIn](https://www.linkedin.com/in/ahmed-fathy/)
 - Mahmoud Hossam [LinkedIn](https://www.linkedin.com/in/mahmoud-hossam/)
