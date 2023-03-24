@@ -49,7 +49,16 @@ namespace Identity
             app.UseAuthentication();// check cookie
             app.UseAuthorization();//check Role
 
-            
+            app.MapAreaControllerRoute(
+                name: "Admin_default",
+                areaName: "Admin",
+                pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+
+            app.MapAreaControllerRoute(
+                name: "Seller_default",
+                areaName: "Seller",
+                pattern: "Seller/{controller=Home}/{action=Index}/{id?}");
+
 
             app.MapControllerRoute(
                 name: "default",

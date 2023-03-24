@@ -4,11 +4,12 @@ using System.Data;
 
 namespace Identity.Areas.Seller.Controllers
 {
+    [Area("Seller")]
     [Authorize(Roles = "Seller")]
     public class SellerDashboardController : Controller
     {
-        [Area("Seller")]
-        [Route("Seller/[Controller]")]
+        //[Area("Seller")]
+        //[Route("Seller/[Controller]")]
         public IActionResult Index()
         {
             return View();
