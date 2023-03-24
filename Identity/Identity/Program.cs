@@ -49,6 +49,8 @@ namespace Identity
             app.UseAuthentication();// check cookie
             app.UseAuthorization();//check Role
 
+            
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

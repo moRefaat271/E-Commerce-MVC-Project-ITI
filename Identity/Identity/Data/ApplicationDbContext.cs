@@ -16,6 +16,9 @@ namespace Identity.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Order>().Property(o => o.Total).HasPrecision(20, 4);
+            builder.Entity<Product>().Property(o => o.Price).HasPrecision(20, 4);
+            builder.Entity<OrderProduct>().Property(o => o.Price).HasPrecision(20, 4);
             builder.Entity<OrderProduct>().HasKey(o => new { o.OrderId, o.ProductId });
             base.OnModelCreating(builder);
         }
