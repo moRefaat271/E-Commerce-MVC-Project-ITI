@@ -45,7 +45,8 @@ namespace Identity.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(20, 4)
+                        .HasColumnType("decimal(20,4)");
 
                     b.HasKey("OrderId");
 
@@ -65,12 +66,17 @@ namespace Identity.Data.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(20, 4)
+                        .HasColumnType("decimal(20,4)");
 
                     b.Property<string>("SellerId")
                         .IsRequired()
@@ -174,6 +180,10 @@ namespace Identity.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -192,7 +202,8 @@ namespace Identity.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(20, 4)
+                        .HasColumnType("decimal(20,4)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");

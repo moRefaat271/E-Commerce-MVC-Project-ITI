@@ -16,6 +16,9 @@ namespace E_Commerce.Models
 
         [Required]
         public required string SellerId { get; set; }
+        public required string Image { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
 
         [ForeignKey("SellerId")]
         public Seller? Seller { get; set; }
@@ -23,7 +26,6 @@ namespace E_Commerce.Models
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
         public int CategoryId { get; set; }
-
         public ICollection<OrderProduct>? OrderProducts { get; set; } = new HashSet<OrderProduct>();
     }
 }
