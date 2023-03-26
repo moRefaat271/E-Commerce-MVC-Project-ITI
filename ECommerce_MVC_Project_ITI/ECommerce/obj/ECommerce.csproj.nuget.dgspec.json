@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Fathy\\Desktop\\New folder (2)\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj": {}
+    "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Fathy\\Desktop\\New folder (2)\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj": {
+    "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Fathy\\Desktop\\New folder (2)\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
+        "projectUniqueName": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
         "projectName": "ECommerce",
-        "projectPath": "C:\\Users\\Fathy\\Desktop\\New folder (2)\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
+        "projectPath": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
         "packagesPath": "C:\\Users\\Fathy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Fathy\\Desktop\\New folder (2)\\ECommerce_MVC_Project_ITI\\ECommerce\\obj\\",
+        "outputPath": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
