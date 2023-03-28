@@ -7,9 +7,11 @@
     <UserSecretsId>aspnet-Identity-7b14416d-aff1-41f5-9bc7-aeb1f938b604</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="C:\Users\Fathy\Downloads\Compressed\E-Commerce-MVC-Project-ITI-Khaled_New_Branch\ECommerce_MVC_Project_ITI\ECommerce\Program.cs" Link="Program.cs" />
+	<ItemGroup>
+    <Compile Include="D:\ITI\Project\E-Commerce MVC Project-ITI\ECommerce_MVC_Project_ITI\ECommerce\Program.cs" Link="Program.cs" />
+    
   </ItemGroup>
+	
 
 	
   <ItemGroup>
