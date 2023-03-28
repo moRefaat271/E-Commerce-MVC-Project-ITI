@@ -9,8 +9,9 @@ namespace Identity.Data
     {
         [System.ComponentModel.DataAnnotations.Required]
         [MaxLength(50,ErrorMessage ="please Enter shorter name ")]
-        public  string? Name { get; set; }
 
+        [RegularExpression(@"[a-zA-Z]+", ErrorMessage = "Name Must be only characters")]
+        public  string? Name { get; set; }
 
         public string? ProfilePicture { get; set; }
 

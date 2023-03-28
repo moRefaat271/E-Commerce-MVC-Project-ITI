@@ -1,4 +1,5 @@
 using BIM_App.Servicies;
+using E_Commerce.Models;
 using Identity.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -17,12 +18,13 @@ namespace Identity
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            //builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI().AddDefaultTokenProviders();
+             
 
             builder.Services.AddScoped<IFileService, FileService>();
 
@@ -82,6 +84,44 @@ namespace Identity
                 }
             }
             //------------------------------------------------------------------------------------------------------------
+
+
+
+
+            //-----------------------------------------------------------------------------------------------------------
+            // Seed the database with a static seller user if it doesn't exist
+            using var scopeSeller = app.Services.CreateScope();
+            var userManagerSeller = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+            var roleManagerSeller = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            var SellerEmail = "Seller@example.com";
+            var SellerPassword = "P@ssw0rd";
+            if (userManagerSeller.FindByEmailAsync(SellerEmail).Result == null)
+            {
+                if (roleManagerSeller.FindByNameAsync("Seller").Result == null)
+                {
+                    var Seller = new IdentityRole("Seller");
+                    roleManagerSeller.CreateAsync(Seller).Wait();
+                }
+
+                var SellerUser = new Seller
+                {
+                    UserName = SellerEmail,
+                    Email = SellerEmail,
+                    Name = "Seller"
+                };
+                var result = userManagerSeller.CreateAsync(SellerUser, SellerPassword).Result;
+
+                if (result.Succeeded)
+                {
+                    userManagerSeller.AddToRoleAsync(SellerUser, "Seller").Wait();
+                }
+            }
+            //------------------------------------------------------------------------------------------------------------
+
+
+
+
 
             app.MapAreaControllerRoute(
                 name: "Admin_default",

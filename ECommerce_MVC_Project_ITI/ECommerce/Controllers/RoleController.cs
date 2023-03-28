@@ -17,17 +17,18 @@ namespace Identity.Controllers
        //[Route("")]
         public IActionResult AddRole()
         {
+            RoleViewModel model = new RoleViewModel();
             ViewBag.lst = new List<SelectListItem> {
                 new SelectListItem { Value = "Admin", Text = "Admin" },
                 new SelectListItem { Value = "Seller", Text = "Seller" },
                 new SelectListItem { Value = "User", Text = "User" }
             };
-            return View();
+            return View(model);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> AddRole(IFormCollection roleInput)
+        public async Task<IActionResult> AddRole(RoleViewModel roleInput)
         {
             ViewBag.lst = new List<SelectListItem> {
                 new SelectListItem { Value = "Admin", Text = "Admin" },
@@ -36,7 +37,7 @@ namespace Identity.Controllers
             };
             if (ModelState.IsValid)
             {
-                 IdentityRole Role = new IdentityRole() { Name = roleInput["RoleName"] };
+                 IdentityRole Role = new IdentityRole() { Name = roleInput.RoleName };
                  IdentityResult result=await  roleManager.CreateAsync(Role);
                 if(result.Succeeded)
                 {

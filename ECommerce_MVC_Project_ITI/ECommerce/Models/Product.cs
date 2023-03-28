@@ -7,19 +7,17 @@ namespace E_Commerce.Models
     public class Product
     {
         public int ProductId { get; set; }
-
         [Required]
         public string Name { get; set; }
-
+        [Required]
+        public string ProductDescription { get; set; }
+        [Required]
+        public int NumInStock { get; set; }
         [Required]
         public decimal Price { get; set; }
-
         [Required]
-        public required string SellerId { get; set; }
-        public required string Image { get; set; }
-        [NotMapped]
-        public IFormFile ImageFile { get; set; }
-
+        public string SellerId { get; set; }
+        public string Image { get; set; }
         [ForeignKey("SellerId")]
         public Seller? Seller { get; set; }
 

@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using E_Commerce.Models;
 
 namespace Identity.Areas.Identity.Pages.Account
 {
@@ -174,12 +175,12 @@ namespace Identity.Areas.Identity.Pages.Account
         {
             try
             {
-                return Activator.CreateInstance<AppUser>();
+                return Activator.CreateInstance<E_Commerce.Models.Seller>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(AppUser)}'. " +
-                    $"Ensure that '{nameof(AppUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(E_Commerce.Models.Seller)}'. " +
+                    $"Ensure that '{nameof(E_Commerce.Models.Seller)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/RegisterSeller.cshtml");
             }
         }

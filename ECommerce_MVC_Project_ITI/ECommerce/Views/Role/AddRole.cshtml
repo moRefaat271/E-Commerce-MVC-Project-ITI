@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "AddRole";
+    //Layout = null;
 }
 
 <h1>AddRole</h1>
@@ -9,25 +10,39 @@
 <h4>RoleViewModel</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6 text-center">
         <form asp-action="AddRole">
+            <div class="form-group">
+                <select asp-for="RoleName" asp-items="ViewBag.lst" class="form-control-lg custom-select"></select>
+            </div>
+
             <div asp-validation-summary="All" class="text-danger"></div>
 
-            <div class="form-group">
-                <select asp-for="RoleName" asp-items="ViewBag.lst"></select>
-            </div>
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group text-center">
+                <input type="submit" value="Create" class="btn btn-primary btn-lg" />
             </div>
         </form>
     </div>
 </div>
 
+<style>
+    select.form-control-lg {
+        background-color: white;
+        color: black;
+    }
+
+    .custom-select {
+        background-color: white;
+        color: black;
+    }
+
+</style>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
+@section Scripts 
+{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

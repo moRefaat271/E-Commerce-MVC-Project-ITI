@@ -22,9 +22,8 @@
         </li>
         <li>
             <p>Scan the QR Code or enter this key <kbd>@Model.SharedKey</kbd> into your two factor authenticator app. Spaces and casing do not matter.</p>
-            <div class="alert alert-info">Learn how to <a href="https://go.microsoft.com/fwlink/?Linkid=852423">enable QR code generation</a>.</div>
-            <div id="qrCode"></div>
-            <div id="qrCodeData" data-url="@Model.AuthenticatorUri"></div>
+            <div id="qrCode">
+            <div id="qrCodeData" data-url="@Html.Raw("@Model.AuthenticatorUri")"></div></div>
         </li>
         <li>
             <p>
@@ -48,6 +47,39 @@
     </ol>
 </div>
 
+@*@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script type="text/javascript" src="~/lib/qrcode.js"></script>
+        
+    <script>
+            
+        window.addEventListener("load", () => {
+            const uri = "@Html.Raw("@Model.AuthenticatorUri")";
+      new QRCode(document.getElementById("qrCode"),
+        {
+          text: uri,
+          width: 150,
+          height: 150
+        });
+    });
+
+    </script>
+}*@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script type="text/javascript" src="~/lib/qrcode.js"></script>
+    <script type="text/javascript" src="~/js/qr.js"></script>
+    <script>
+        window.addEventListener("load", () => {
+            const uri = document.getElementById("qrCodeData").getAttribute('data-url');
+            new QRCode(document.getElementById("qrCode"),
+                {
+                    text: uri,
+                    width: 150,
+                    height: 150
+                });
+        });
+    </script>
 }

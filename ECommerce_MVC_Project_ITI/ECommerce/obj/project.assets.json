@@ -59,6 +59,22 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Authentication.Google/7.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/7.0.4": {
         "type": "package",
         "compile": {
@@ -3888,6 +3904,21 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.Google/7.0.4": {
+      "sha512": "yGw9B3/26gjIHvzR3A8FqUQ0AHVC2eeM0e8DyxkEJxnuGN0Z7FaumiPkTvIKSHvsMo7wTglIbqDaorbnTAEzQA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.google/7.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net7.0/Microsoft.AspNetCore.Authentication.Google.dll",
+        "lib/net7.0/Microsoft.AspNetCore.Authentication.Google.xml",
+        "microsoft.aspnetcore.authentication.google.7.0.4.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.google.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Cryptography.Internal/7.0.4": {
@@ -11046,6 +11077,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Microsoft.AspNetCore.Authentication.Google >= 7.0.4",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 7.0.2",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 7.0.4",
       "Microsoft.AspNetCore.Identity.UI >= 7.0.4",
@@ -11061,11 +11093,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
+      "projectUniqueName": "C:\\Users\\Fathy\\Downloads\\Compressed\\E-Commerce-MVC-Project-ITI-Khaled_New_Branch\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
       "projectName": "ECommerce",
-      "projectPath": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
+      "projectPath": "C:\\Users\\Fathy\\Downloads\\Compressed\\E-Commerce-MVC-Project-ITI-Khaled_New_Branch\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
       "packagesPath": "C:\\Users\\Fathy\\.nuget\\packages\\",
-      "outputPath": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\obj\\",
+      "outputPath": "C:\\Users\\Fathy\\Downloads\\Compressed\\E-Commerce-MVC-Project-ITI-Khaled_New_Branch\\ECommerce_MVC_Project_ITI\\ECommerce\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -11099,6 +11131,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.Google": {
+            "target": "Package",
+            "version": "[7.0.4, )"
+          },
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",
             "version": "[7.0.2, )"
