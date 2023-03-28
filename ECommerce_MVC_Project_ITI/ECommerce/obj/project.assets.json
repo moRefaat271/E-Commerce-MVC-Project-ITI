@@ -11093,11 +11093,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Fathy\\Downloads\\Compressed\\E-Commerce-MVC-Project-ITI-Khaled_New_Branch\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
+      "projectUniqueName": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
       "projectName": "ECommerce",
-      "projectPath": "C:\\Users\\Fathy\\Downloads\\Compressed\\E-Commerce-MVC-Project-ITI-Khaled_New_Branch\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
+      "projectPath": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\ECommerce.csproj",
       "packagesPath": "C:\\Users\\Fathy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Fathy\\Downloads\\Compressed\\E-Commerce-MVC-Project-ITI-Khaled_New_Branch\\ECommerce_MVC_Project_ITI\\ECommerce\\obj\\",
+      "outputPath": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
