@@ -1,5 +1,6 @@
 using BIM_App.Servicies;
 using E_Commerce.Models;
+using ECommerce.RepoServices;
 using Identity.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -26,7 +27,9 @@ namespace Identity
                 .AddDefaultUI().AddDefaultTokenProviders();
              
 
+
             builder.Services.AddScoped<IFileService, FileService>();
+            builder.Services.AddScoped<ICategoryRepo, CategoryRepoService>();
 
             builder.Services.AddControllersWithViews();
 
