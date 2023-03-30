@@ -12,7 +12,7 @@
                                 @*<p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">You will find all you need</p>*@
                                 <!-- Hero-btn -->
                                 <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s" data-duration="2000ms">
-                                    <a href="industries.html" class="btn hero-btn">Shop Now</a>
+                                    <a asp-controller="Categories" asp-action="Index" class="btn hero-btn">Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
         </div>
     </div>
     <!-- slider Area End-->
-    <!-- ? New Product Start -->
+    @*<!-- ? New Product Start -->
     <section class="new-product-area section-padding30">
         <div class="container">
             <!-- Section tittle -->
@@ -96,7 +96,7 @@
             </div>
         </div>
     </section>
-    <!--  New Product End -->
+    <!--  New Product End -->*@
 
     <!--? Popular Items Start -->
     <div class="popular-items section-padding30">
@@ -217,14 +217,14 @@
             <!-- Button -->
             <div class="row justify-content-center">
                 <div class="room-btn pt-70">
-                    <a href="catagori.html" class="btn view-btn1">View More Products</a>
+                    <a asp-controller="Products" class="btn view-btn1">View More Products</a>
                 </div>
             </div>
         </div>
     </div>
     <!-- Popular Items End -->
 
-    <!--? Watch Choice  Start-->
+    @*<!--? Watch Choice  Start-->
     <div class="watch-area section-padding30">
         <div class="container">
             <div class="row align-items-center justify-content-between padding-130">
@@ -257,5 +257,5 @@
             </div>
         </div>
     </div>
-    <!-- Watch Choice  End-->
+    <!-- Watch Choice  End-->*@
 </main>

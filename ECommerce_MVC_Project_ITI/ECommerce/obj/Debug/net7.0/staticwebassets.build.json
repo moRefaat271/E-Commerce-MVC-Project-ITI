@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8g8JYRdYE8GggYSAmtgWPs+DMu7ZmcSyFjAlpQDN070=",
+  "Hash": "tvA+c+3JMF6GTIukzbpjVHB0P3/BcfnnVh86gVFV/hM=",
   "Source": "ECommerce",
   "BasePath": "_content/ECommerce",
   "Mode": "Default",
@@ -3706,6 +3706,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\img\\hero\\watch.png"
     },
     {
+      "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\assets\\img\\logo\\loader.png",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "assets/img/logo/loader.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\logo\\loader.png"
+    },
+    {
       "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\assets\\img\\logo\\logo.png",
       "SourceId": "ECommerce",
       "SourceType": "Discovered",
@@ -3738,6 +3755,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\logo\\logo2_footer.png"
+    },
+    {
+      "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\assets\\img\\logo\\logout.png",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "assets/img/logo/logout.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\logo\\logout.png"
     },
     {
       "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\assets\\img\\offers\\1.png",

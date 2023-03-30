@@ -3,6 +3,11 @@
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
 
+@*@using Microsoft.AspNetCore.Identity
+@using Identity.Data
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
@@ -25,3 +30,39 @@ else
     </li>
 }
 </ul>
+*@
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li>
+@*        <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <img src="/assets//img/logo/logout.png" style="width:15px" />
+        </a>*@
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })">
+            <button type="submit" style="background:none; border:none"><img src="/assets//img/logo/logout.png" style="width:15px" /></button>
+        </form>
+    </li>
+
+}
+else
+{
+    <li> <a asp-area="Identity" asp-page="/Account/Login"><span class="flaticon-user"></span></a></li>
+
+}
+<li><a asp-controller="Cart"><span class="flaticon-shopping-cart"></span></a> </li>
+
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity?.Name</a>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Join US!</a>
+    </li>
+}

@@ -50,6 +50,8 @@
 </html>*@
 
 
+
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -90,7 +92,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="~/assets/img/logo/logo.png" alt="">
+                    <img src="~/assets/img/logo/loader.png" alt="">
                 </div>
             </div>
         </div>
@@ -107,23 +109,22 @@
                     <div class="menu-wrapper">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.html"
+                            <a asp-action="Index" asp-controller="Home"
                                style="color: #FF003C; text-decoration:none; font-size:40px; font-family: 'Archivo Black', sans-serif;">
-                                ECommerce</a>
+                                ITI Shop</a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
                                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                                    <li><a href="shop.html">shop</a></li>
-                                    <li><a href="about.html">about</a></li>
+                                    <li><a asp-controller="Categories" asp-action="Index">Categories</a></li>
                                     <li class="hot">
-                                        <a href="#">Latest</a>
-                                        <ul class="submenu">
+                                        <a href="~/Products/">Products</a>
+                                        @*<ul class="submenu">
                                             <li><a href="~/Products/"> Product list</a></li>
                                             <li><a href="product_details.html"> Product Details</a></li>
-                                        </ul>
+                                        </ul>*@
                                     </li>
                                     @*<li>
                                         <a href="blog.html">Blog</a>
@@ -142,7 +143,10 @@
                                             <li><a href="checkout.html">Product Checkout</a></li>
                                         </ul>
                                     </li>*@
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a asp-controller="About">About</a></li>
+                                    
+                                    <li><a asp-controller="Contact">Contact</a></li>
+
                                 </ul>
                             </nav>
                         </div>
@@ -154,9 +158,8 @@
                                         <span class="flaticon-search"></span>
                                     </div>
                                 </li>
-                                <li> <a asp-area="Identity" asp-page="/Account/Login"><span class="flaticon-user"></span></a></li>
-                                <li><a href="cart.html"><span class="flaticon-shopping-cart"></span></a> </li>
-                            @*<partial name="_LoginPartial" />*@
+                                <partial name="_LoginPartial" />
+                                
                             </ul>
                         </div>
                     </div>
@@ -176,10 +179,10 @@
 
     <footer>
         <!-- Footer Start-->
-        <div class="footer-area footer-padding">
+        <div class="footer-area">
             <div class="container">
                 <div class="row d-flex justify-content-between">
-                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                    @*<div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
                         <div class="single-footer-caption mb-50">
                             <div class="single-footer-caption mb-30">
                                 <!-- logo -->
@@ -232,15 +235,17 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
+
+
                 <!-- Footer bottom -->
                 <div class="row align-items-center">
                     <div class="col-xl-7 col-lg-8 col-md-7">
                         <div class="footer-copy-right">
                             <p>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved ITI Project
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
@@ -250,7 +255,7 @@
                             <!-- social -->
                             <div class="footer-social">
                                 <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
                                 <a href="#"><i class="fab fa-behance"></i></a>
                                 <a href="#"><i class="fas fa-globe"></i></a>
                             </div>

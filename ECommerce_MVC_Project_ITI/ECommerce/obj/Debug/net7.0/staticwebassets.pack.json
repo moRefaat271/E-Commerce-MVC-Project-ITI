@@ -625,12 +625,20 @@
       "PackagePath": "staticwebassets\\assets\\img\\hero\\watch.png"
     },
     {
+      "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\assets\\img\\logo\\loader.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo\\loader.png"
+    },
+    {
       "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\assets\\img\\logo\\logo.png",
       "PackagePath": "staticwebassets\\assets\\img\\logo\\logo.png"
     },
     {
       "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\assets\\img\\logo\\logo2_footer.png",
       "PackagePath": "staticwebassets\\assets\\img\\logo\\logo2_footer.png"
+    },
+    {
+      "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\assets\\img\\logo\\logout.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo\\logout.png"
     },
     {
       "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\assets\\img\\offers\\1.png",
