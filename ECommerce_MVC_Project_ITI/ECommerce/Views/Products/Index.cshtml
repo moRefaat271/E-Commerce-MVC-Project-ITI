@@ -6,7 +6,7 @@
 
 
 <main>
-   
+
     <!-- Latest Products Start -->
     <section class="popular-items latest-padding">
         <div class="container">
@@ -50,50 +50,50 @@
 
 
 
-                                @foreach (var item in Model) 
-                                {
-                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                     <div class="single-popular-items mb-50 text-center">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-popular-items mb-50 text-center">
 
-                                <div class="popular-img">
+                                    <div class="popular-img">
 
                                         <img src=" @Html.DisplayFor(modelItem => item.Image)" alt="">
-                                    <div class="img-cap">
-                                        <span>Add to cart</span>
+                                        <div class="img-cap">
+                                            <span>Add to cart</span>
+                                        </div>
+                                        <div class="favorit-items">
+                                            <span class="flaticon-heart"></span>
+                                        </div>
                                     </div>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
-                                    </div>
-                                </div>
-                                     <div class="popular-caption">
+                                    <div class="popular-caption">
                                         <h3><a href="product_details.html"> @Html.DisplayFor(modelItem => item.Name)</a></h3>
                                         <span>$ @Html.DisplayFor(modelItem => item.Price)  </span>
 
-                                        @if(User.IsInRole("Admin") || User.IsInRole("Seller"))
-                                         {
-                                        <input type="hidden" data=" @Html.DisplayFor(modelItem => item.Seller.Id)">
-                                        <input type="hidden" data="@Html.DisplayFor(modelItem => item.Category.Id)">
-                                        <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> 
-                                        <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> 
-                                        <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-                                         }
+                                        @if (User.IsInRole("Admin") || User.IsInRole("Seller"))
+                                        {
+                                            <input type="hidden" data=" @Html.DisplayFor(modelItem => item.Seller.Id)">
+                                            <input type="hidden" data="@Html.DisplayFor(modelItem => item.Category.Id)">
+                                            <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
+                                            <a asp-action="Details" asp-route-id="@item.ProductId">Details</a>
+                                            <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                                        }
                                     </div>
-                                    </div>
-                                    </div>
+                                </div>
+                            </div>
 
 
-                                }
+                        }
 
 
 
 
                     </div>
                 </div>
-                
+
                 <!-- Card two -->
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <div class="row">
-                       
+
                         @foreach (var item in Model)
                         {
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
@@ -133,7 +133,7 @@
                 <!-- Card three -->
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="row">
-                        
+
                         @foreach (var item in Model)
                         {
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
@@ -166,12 +166,12 @@
                             </div>
 
 
-                                        }
+                        }
 
+                    </div>
                 </div>
+                <!-- End Nav Card -->
             </div>
-            <!-- End Nav Card -->
-        </div>
     </section>
     <!-- Latest Products End -->
     <!--? Shop Method Start-->

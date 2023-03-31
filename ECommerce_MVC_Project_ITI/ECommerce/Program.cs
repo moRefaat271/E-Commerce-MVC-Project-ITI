@@ -30,6 +30,9 @@ namespace Identity
 
             builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddScoped<ICategoryRepo, CategoryRepoService>();
+            builder.Services.AddScoped<IProductRepo, ProductRepo>();
+            builder.Services.AddScoped<ISellerRepo, SellerRepo>();
+
 
             builder.Services.AddControllersWithViews();
 

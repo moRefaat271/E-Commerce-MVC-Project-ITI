@@ -8,7 +8,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-    <Compile Include="D:\ITI\Project\E-Commerce MVC Project-ITI\ECommerce_MVC_Project_ITI\ECommerce\Program.cs" Link="Program.cs" />
+    <Compile Include="D:\ITI9month\MVC\Project\E-Commerce-MVC-Project-ITI\ECommerce_MVC_Project_ITI\ECommerce\Program.cs" Link="Program.cs" />
     
   </ItemGroup>
 	
