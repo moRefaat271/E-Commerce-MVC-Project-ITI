@@ -13,24 +13,18 @@ namespace ECommerce.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly ApplicationDbContext _context;
 
         public ICategoryRepo CatRep { get; }
 
-        public CategoriesController(ApplicationDbContext context , ICategoryRepo CatRep)
+        public CategoriesController(ICategoryRepo CatRep)
         {
-            _context = context;
             this.CatRep = CatRep;
         }
 
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-              return _context.Categories != null ?
-				
-
-						  View(await CatRep.GetAllCategoriesAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
+              return await CatRep.GetAllCategoriesAsync() != null ?View(await CatRep.GetAllCategoriesAsync()):Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
         }
 
         // GET: Categories/Details/5
@@ -47,8 +41,9 @@ namespace ECommerce.Controllers
             {
                 return NotFound();
             }
+            var productList = await CatRep.GetAllProductOfOneCategoryAsync(category);
 
-            return View(category);
+            return View(productList);
         }
 
         // GET: Categories/Create
@@ -105,13 +100,13 @@ namespace ECommerce.Controllers
             {
                 try
                 {
-                    CatRep.UpdateCategoryAsync(category);   
+                   await CatRep.UpdateCategoryAsync(category);   
                     //_context.Update(category);
                     //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.Id))
+                    if ( ! CatRep.CategoryExists(category.Id))
                     {
                         return NotFound();
                     }
@@ -161,9 +156,6 @@ namespace ECommerce.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
-        {
-          return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+
     }
 }

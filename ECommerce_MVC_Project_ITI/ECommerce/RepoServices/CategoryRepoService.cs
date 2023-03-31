@@ -1,4 +1,5 @@
-﻿using Identity.Data;
+﻿using E_Commerce.Models;
+using Identity.Data;
 using Identity.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,16 @@ namespace ECommerce.RepoServices
         public async Task<List<Category>> GetAllCategoriesAsync()
         {
            return await CatContext.Categories.ToListAsync();
+        }
+
+        public bool CategoryExists(int id)
+        {
+            return (CatContext.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public async Task<List<Product>> GetAllProductOfOneCategoryAsync(Category category)
+        {
+            return await CatContext.Products.Where(p => p.CategoryId == category.Id).ToListAsync();
         }
 
         public async Task<Category> GetCategoryByIdAsync(int categoryId)
@@ -39,11 +50,6 @@ namespace ECommerce.RepoServices
             CatContext.Categories.Remove(CatContext.Categories.Find(categoryId));
             await CatContext.SaveChangesAsync();
         }
-
-
-
-
-
 
 
 

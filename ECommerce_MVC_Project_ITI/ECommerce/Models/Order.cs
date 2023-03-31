@@ -9,9 +9,6 @@ namespace E_Commerce.Models
     {
         public int OrderId { get; set; }
 
-        [Required]
-        public int Quantity { get; set; }
-
         [DataType(DataType.DateTime)]
         public DateTime OrderDate { get; set; } = DateTime.Now;
         [Required]

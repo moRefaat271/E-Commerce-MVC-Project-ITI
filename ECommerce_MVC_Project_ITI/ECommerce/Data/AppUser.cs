@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Models;
+using ECommerce.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Build.Framework;
 using System.ComponentModel.DataAnnotations;
@@ -16,5 +17,7 @@ namespace Identity.Data
         public string? ProfilePicture { get; set; }
 
         public ICollection<Order>? Orders { get; set; } = new HashSet<Order>();
+        //
+        public virtual Cart? Cart { get; set; }
     }
 }

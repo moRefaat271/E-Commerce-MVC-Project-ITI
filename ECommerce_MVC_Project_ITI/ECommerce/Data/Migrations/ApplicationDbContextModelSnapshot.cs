@@ -22,6 +22,48 @@ namespace Identity.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ECommerce.Models.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("ECommerce.Models.CartProduct", b =>
+                {
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(20, 4)
+                        .HasColumnType("decimal(20,4)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("CartId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartProducts");
+                });
+
             modelBuilder.Entity("E_Commerce.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -46,9 +88,6 @@ namespace Identity.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PostalCode")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<string>("Street")
@@ -373,6 +412,36 @@ namespace Identity.Data.Migrations
                     b.HasDiscriminator().HasValue("Seller");
                 });
 
+            modelBuilder.Entity("ECommerce.Models.Cart", b =>
+                {
+                    b.HasOne("Identity.Data.AppUser", "AppUser")
+                        .WithOne("Cart")
+                        .HasForeignKey("ECommerce.Models.Cart", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("ECommerce.Models.CartProduct", b =>
+                {
+                    b.HasOne("ECommerce.Models.Cart", "Cart")
+                        .WithMany("CartProducts")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("E_Commerce.Models.Product", "Product")
+                        .WithMany("CartProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("E_Commerce.Models.Order", b =>
                 {
                     b.HasOne("Identity.Data.AppUser", "AppUser")
@@ -473,6 +542,11 @@ namespace Identity.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ECommerce.Models.Cart", b =>
+                {
+                    b.Navigation("CartProducts");
+                });
+
             modelBuilder.Entity("E_Commerce.Models.Order", b =>
                 {
                     b.Navigation("OrderProducts");
@@ -480,11 +554,15 @@ namespace Identity.Data.Migrations
 
             modelBuilder.Entity("E_Commerce.Models.Product", b =>
                 {
+                    b.Navigation("CartProducts");
+
                     b.Navigation("OrderProducts");
                 });
 
             modelBuilder.Entity("Identity.Data.AppUser", b =>
                 {
+                    b.Navigation("Cart");
+
                     b.Navigation("Orders");
                 });
 
