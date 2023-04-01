@@ -25,7 +25,7 @@ namespace ECommerce.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
-            var cart = _context.Carts.Include(c => c.CartProducts)
+            var cart = _context?.Carts?.Include(c => c.CartProducts)
                     .ThenInclude(cp => cp.Product)
                 .FirstOrDefault(c => c.AppUserId == user.Id);
 
@@ -68,7 +68,7 @@ namespace ECommerce.Controllers
                 _context.Carts.Add(cart);
             }
 
-            var cartProduct = cart.CartProducts.FirstOrDefault(cp => cp.ProductId == productId);
+            var cartProduct = cart?.CartProducts?.FirstOrDefault(cp => cp.ProductId == productId);
 
             if (cartProduct == null)
             {
@@ -79,7 +79,7 @@ namespace ECommerce.Controllers
                     Quantity = quantity,
                     Price = price
                 };
-                cart.CartProducts.Add(cartProduct);
+                cart?.CartProducts?.Add(cartProduct);
             }
             else
             {
@@ -103,7 +103,7 @@ namespace ECommerce.Controllers
                 .Include(c => c.CartProducts)
                 .FirstOrDefault(c => c.AppUserId == user.Id);
 
-            var cartProduct = cart.CartProducts.FirstOrDefault(cp => cp.ProductId == productId);
+            var cartProduct = cart?.CartProducts?.FirstOrDefault(cp => cp.ProductId == productId);
 
             if (cartProduct != null)
             {
@@ -130,7 +130,7 @@ namespace ECommerce.Controllers
                 .Include(c => c.CartProducts)
                 .FirstOrDefault(c => c.AppUserId == user.Id);
 
-            var cartProduct = cart.CartProducts.FirstOrDefault(cp => cp.ProductId == productId);
+            var cartProduct = cart?.CartProducts?.FirstOrDefault(cp => cp.ProductId == productId);
 
             if (cartProduct != null)
             {

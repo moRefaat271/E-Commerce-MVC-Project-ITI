@@ -38,13 +38,13 @@
                             <div class="col-lg-8">
                                 <p> @Model.NumInStock</p> 
                                 <p>@Model.Price</p>
-                                <p>@Model.Category.Name</p>
-                                <p>@Model.Seller.Name</p>
+                                <p>@Model?.Category?.Name</p>
+                                <p>@Model?.Seller?.Name</p>
                             </div>
                             <div class="add_to_cart">
                                 <form asp-controller="Cart" asp-action="AddToCart">
-                                    <input type="hidden" name="productId" value="@Model.ProductId" />
-                                    <input type="hidden" name="price" value="@Model.Price" />
+                                    <input type="hidden" name="productId" value="@Model?.ProductId" />
+                                    <input type="hidden" name="price" value="@Model?.Price" />
                                     <input type="hidden" name="quantity" value="1" />
                                     <input class="btn btn-danger" type="submit" value="Add to cart" />
                                 </form>
@@ -52,6 +52,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
     <!--================End Single Product Area =================-->
