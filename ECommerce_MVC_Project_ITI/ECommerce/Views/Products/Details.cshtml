@@ -4,45 +4,55 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Seller)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Seller.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ProductId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<main>
+    <!--================Single Product Area =================-->
+    <div style="margin-top: 30px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="product_img_slide owl-carousel">
+                        <div class="single_product_img">
+                            @{
+                                // Retrieve the image URL from a server-side variable
+                                var imageUrl = Model.Image;
+                            }
+                            <img style="width:300px" src="@imageUrl" alt="#" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="single_product_text ">
+                        <h2>
+                            @Model.Name
+                        </h2>
+                        <p>
+                            @Model.ProductDescription
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h3>In Stock:  </h3>
+                                <h3>Price:</h3>
+                                <h3>Category:</h3>
+                                <h3>Seller:</h3>
+                            </div>
+                            <div class="col-lg-8">
+                                <p> @Model.NumInStock</p> 
+                                <p>@Model.Price</p>
+                                <p>@Model.Category.Name</p>
+                                <p>@Model.Seller.Name</p>
+                            </div>
+                            <div class="add_to_cart">
+                                <form asp-controller="Cart" asp-action="AddToCart">
+                                    <input type="hidden" name="productId" value="@Model.ProductId" />
+                                    <input type="hidden" name="price" value="@Model.Price" />
+                                    <input type="hidden" name="quantity" value="1" />
+                                    <input class="btn btn-danger" type="submit" value="Add to cart" />
+                                </form>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================End Single Product Area =================-->
+</main>

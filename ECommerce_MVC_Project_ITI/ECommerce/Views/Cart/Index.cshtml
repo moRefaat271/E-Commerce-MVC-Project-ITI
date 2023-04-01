@@ -1,94 +1,111 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+<style>
+    .cart_inner .table tbody tr td .product_count input{
+        padding-left: 0 !important;
+    }
+</style>
+
+    @model ECommerce.Models.Cart
+
 @{
-}
-<main>
-    <!--================Cart Area =================-->
-    <section class="cart_area mt-3">
-        <div class="container">
-            <div class="cart_inner">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="assets/img/gallery/card1.png" alt="" />
-                                        </div>
-                                        <div class="media-body">
-                                            <p>Minimalistic shop for multipurpose use</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$360.00</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                                        <input class="input-number" type="text" value="1" min="0" max="10">
-                                        <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$720.00</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="assets/img/gallery/card2.png" alt="" />
-                                        </div>
-                                        <div class="media-body">
-                                            <p>Minimalistic shop for multipurpose use</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$360.00</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                                        <input class="input-number" type="text" value="1" min="0" max="10">
-                                        <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$720.00</h5>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <h5>Subtotal</h5>
-                                </td>
-                                <td>
-                                    <h5>$2160.00</h5>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="checkout_btn_inner float-right">
-                        <a class="btn" asp-controller="Home">Continue Shopping</a>
-                        <a class="btn checkout_btn_1" asp-controller="Checkout" >Proceed to checkout</a>
+    if(Model == null)
+    {
+        <h3 style="text-align:center">Your cart is empty</h3>
+    } else if(Model.CartProducts.Count == 0)
+    {
+        <h3 style="text-align:center">Your cart is empty</h3>
+    }
+    else
+    {
+        <main>
+            <!--================Cart Area =================-->
+            <section class="cart_area">
+                <div class="container">
+                    <div class="cart_inner">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        float subtotal = 0;
+                                    }
+                                    @foreach (var item in Model.CartProducts)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="media">
+                                                    <div class="d-flex">
+                                                        <img src="assets/img/gallery/card1.png" alt="" />
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <p>@item.Product.Name</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>@item.Price</h5>
+                                            </td>
+                                            <td>
+                                                
+                                                <form id="" asp-controller="Cart" asp-action="UpdateCart">
+                                                    <input type="hidden" name="productId" value="@item.Product.ProductId">
+                                                        <input style="height:57px" name="quantity" type="number" value="@item.Quantity" min="0" max="10">
+
+                                                        
+                                                        <input style="top:-1px" class="btn btn-danger" type="submit" value="Update">
+                                                </form>
+                                                
+                                            </td>
+                                            <td>
+                                                @{
+                                                    float total = (float)item.Price * (int) item.Quantity;
+                                                    subtotal += total;
+                                                }
+                                                <h5>@total</h5>
+                                            </td>
+
+                                            <td>
+                                                <form asp-action="RemoveFromCart" asp-controller="Cart">
+                                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                                    <button class="btn btn-danger" type="submit">Remove</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <h5>Subtotal</h5>
+                                        </td>
+                                        <td>
+                                            <h5>@subtotal</h5>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="checkout_btn_inner float-right">
+                                <a class="btn" asp-controller="Products">Continue Shopping</a>
+                                <a class="btn checkout_btn_1" asp-controller="Checkout">Proceed to checkout</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    <!--================End Cart Area =================-->
-</main>>
+            </section>
+            <!--================End Cart Area =================-->
+        </main>
+    }
+}
