@@ -132,7 +132,11 @@ namespace Identity.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                        if (returnUrl == "/Cart/AddToCart")
+                        {
+                            return RedirectToAction("Index", "Products");
+                        }
+                        return LocalRedirect(returnUrl);
                 }
                 if (result.IsLockedOut)
                 {

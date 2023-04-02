@@ -1,0 +1,60 @@
+﻿@model ErrorViewModel
+@{
+	ViewData["Title"] = "Error";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Error Page</title>
+	<style>
+		body {
+			background-color: #F7F7F7;
+			font-family: Arial, sans-serif;
+			color: #444;
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+
+		h1 {
+			font-size: 3rem;
+			margin-top: 0;
+		}
+
+		p {
+			font-size: 1.2rem;
+			margin-bottom: 1rem;
+		}
+
+		img {
+			width: 60%;
+			height: 60%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<img src="/assets/img/Error/page-not-found.svg" alt="Error Image" />
+		<h1>Oops! Something went wrong.</h1>
+		<p>We're sorry, but an error has occurred.</p>
+		@if (Model.ShowRequestId)
+		{
+				<p>
+
+				</p>
+		}
+	</div>
+</body>
+</html>
+
+

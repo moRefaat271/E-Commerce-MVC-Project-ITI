@@ -14,7 +14,7 @@
     if(Model == null)
     {
         <h3 style="text-align:center">Your cart is empty</h3>
-    } else if(Model.CartProducts.Count == 0)
+    } else if(Model?.CartProducts?.Count == 0)
     {
         <h3 style="text-align:center">Your cart is empty</h3>
     }
@@ -40,27 +40,27 @@
                                     @{
                                         float subtotal = 0;
                                     }
-                                    @foreach (var item in Model.CartProducts)
+                                    @foreach (var item in Model?.CartProducts)
                                     {
                                         <tr>
                                             <td>
                                                 <div class="media">
                                                     <div class="d-flex">
-                                                        <img src="assets/img/gallery/card1.png" alt="" />
+                                                        <img src="@item?.Product?.Image" alt="" />
                                                     </div>
                                                     <div class="media-body">
-                                                        <p>@item.Product.Name</p>
+                                                        <p>@item?.Product?.Name</p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <h5>@item.Price</h5>
+                                                <h5>@item?.Price</h5>
                                             </td>
                                             <td>
                                                 
                                                 <form id="" asp-controller="Cart" asp-action="UpdateCart">
-                                                    <input type="hidden" name="productId" value="@item.Product.ProductId">
-                                                        <input style="height:57px" name="quantity" type="number" value="@item.Quantity" min="0" max="10">
+                                                    <input type="hidden" name="productId" value="@item?.Product?.ProductId">
+                                                        <input style="height:57px" name="quantity" type="number" value="@item?.Quantity" min="0" max="10">
 
                                                         
                                                         <input style="top:-1px" class="btn btn-danger" type="submit" value="Update">
@@ -77,7 +77,7 @@
 
                                             <td>
                                                 <form asp-action="RemoveFromCart" asp-controller="Cart">
-                                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                                    <input type="hidden" name="productId" value="@item?.ProductId" />
                                                     <button class="btn btn-danger" type="submit">Remove</button>
                                                 </form>
                                             </td>
@@ -99,7 +99,7 @@
                             </table>
                             <div class="checkout_btn_inner float-right">
                                 <a class="btn" asp-controller="Products">Continue Shopping</a>
-                                <a class="btn checkout_btn_1" asp-controller="Checkout">Proceed to checkout</a>
+                                <a class="btn checkout_btn_1" asp-controller="orders" asp-action="create">Proceed to checkout</a>
                             </div>
                         </div>
                     </div>
