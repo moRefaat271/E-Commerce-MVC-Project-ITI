@@ -1,10 +1,12 @@
 using BIM_App.Servicies;
 using E_Commerce.Models;
+using ECommerce.Models;
 using ECommerce.RepoServices;
 using Identity.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 namespace Identity
 {
@@ -18,7 +20,9 @@ namespace Identity
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+            builder.Services.Configure<StripSetting>(builder.Configuration.GetSection("Stripe"));
 
+            StripeConfiguration.SetApiKey(builder.Configuration.GetSection("Stripe")["SecretKey"]);
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -28,8 +32,11 @@ namespace Identity
              
 
 
-            builder.Services.AddScoped<IFileService, FileService>();
+           // builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddScoped<ICategoryRepo, CategoryRepoService>();
+            builder.Services.AddScoped<IProductRepo, ProductRepo>();
+            builder.Services.AddScoped<ISellerRepo, SellerRepo>();
+
 
             builder.Services.AddControllersWithViews();
 

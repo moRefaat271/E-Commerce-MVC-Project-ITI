@@ -24,5 +24,9 @@ namespace ECommerce.Controllers
             var money =_context.Orders.Where(o => o.AppUserId == user.Id).OrderByDescending(o => o.OrderDate).FirstOrDefault();
             return View();
         }
+        public IActionResult Success()
+        {
+            return View("PaymentSuccess");
+        }
     }
 }
