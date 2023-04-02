@@ -1998,3 +1998,4 @@ C:\Users\Fathy\Desktop\E-Commerce-MVC-Project-ITI\ECommerce_MVC_Project_ITI\ECom
 C:\Users\Fathy\Desktop\E-Commerce-MVC-Project-ITI\ECommerce_MVC_Project_ITI\ECommerce\obj\Debug\net7.0\ECommerce.pdb
 C:\Users\Fathy\Desktop\E-Commerce-MVC-Project-ITI\ECommerce_MVC_Project_ITI\ECommerce\obj\Debug\net7.0\ECommerce.genruntimeconfig.cache
 C:\Users\Fathy\Desktop\E-Commerce-MVC-Project-ITI\ECommerce_MVC_Project_ITI\ECommerce\obj\Debug\net7.0\ref\ECommerce.dll
+D:\ITI\Project\E-Commerce MVC Project-ITI\ECommerce_MVC_Project_ITI\ECommerce\bin\Debug\net7.0\Stripe.net.dll

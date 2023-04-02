@@ -8,7 +8,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-    <Compile Include="C:\Users\Fathy\Desktop\E-Commerce-MVC-Project-ITI\ECommerce_MVC_Project_ITI\ECommerce\Program.cs" Link="Program.cs" />
+    <Compile Include="D:\ITI\Project\E-Commerce MVC Project-ITI\ECommerce_MVC_Project_ITI\ECommerce\Program.cs" Link="Program.cs" />
     
   </ItemGroup>
 	
@@ -43,6 +43,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.5" />
+    <PackageReference Include="Stripe.net" Version="41.12.0" />
   </ItemGroup>
 
   <ItemGroup>
