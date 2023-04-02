@@ -1,33 +1,52 @@
-﻿@{
-    ViewData["Title"] = "Pay with PayPal";
-}
-@{
-    Layout = null;
-}
+﻿
 
-<h1>@ViewData["Title"]</h1>
 
-<p>Click the button below to pay with PayPal:</p>
+<button type="submit" id="paypal-btn"></button>
 
-<div id="paypal-button-container"></div>
-
-<script src="https://www.paypal.com/sdk/js?client-id=ATOYRbaMQDeT4tUuhvpKZv-4tQc-xgH2ZKmvbiE0HQOFJoFPlEKxPUOggpSgCW3vGx-NFxew2E-MWekQ"></script>
 <script>
-    paypal.Buttons({
-        createOrder: function (data, actions) {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: '100.00'
-                    }
-                }]
-            });
-        },
-        onApprove: function (data, actions) {
-            return actions.order.capture().then(function (details) {
-                console.log(details);
-                // TODO: handle successful payment response
-            });
-        }
-    }).render('#paypal-button-container');
+    var orderTotal = 100;
 </script>
+
+@section Scripts{
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+
+
+        let _total = parseFloat(orderTotal.toFixed(2));
+
+
+        paypal.Button.render({
+            env: 'sandbox',
+            client: {
+                sandbox: 'ATOYRbaMQDeT4tUuhvpKZv-4tQc-xgH2ZKmvbiE0HQOFJoFPlEKxPUOggpSgCW3vGx-NFxew2E-MWekQ',
+
+            },
+            locale: 'en_US',
+            style: {
+                size: 'small',
+                color: 'gold',
+                shape: 'pill'
+            },
+            commit: true,
+
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: _total,
+                            currency: 'USD'
+                        }
+                    }]
+                });
+            },
+
+            onAuthorize: function (data, actions) {
+                actions.payment.execute()
+                var url = '@Url.Action("Index", "Contact", new {})';
+                window.location.href = url;
+            }
+
+        }, '#paypal-btn');
+    </script>
+    }
+
