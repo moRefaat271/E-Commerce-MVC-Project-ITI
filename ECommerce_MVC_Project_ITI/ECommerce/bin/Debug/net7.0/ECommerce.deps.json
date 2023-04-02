@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "ECommerce/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.Facebook": "7.0.4",
           "Microsoft.AspNetCore.Authentication.Google": "7.0.4",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "7.0.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "7.0.4",
@@ -60,6 +61,14 @@
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Facebook/7.0.4": {
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.Facebook.dll": {
+            "assemblyVersion": "7.0.4.0",
+            "fileVersion": "7.0.423.11903"
           }
         }
       },
@@ -2427,6 +2436,13 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.Facebook/7.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lvB+Gz9qH9INigZDy2chNw4ELHA3Fed4nyAgffq6gks4OEoxY/aB/DBec6+bIAuGn6zYZ8Ju7o0MqN+OSbBf5w==",
+      "path": "microsoft.aspnetcore.authentication.facebook/7.0.4",
+      "hashPath": "microsoft.aspnetcore.authentication.facebook.7.0.4.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.Google/7.0.4": {
       "type": "package",

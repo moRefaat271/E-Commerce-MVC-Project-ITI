@@ -29,10 +29,26 @@ namespace Identity
             builder.Services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI().AddDefaultTokenProviders();
-             
 
 
-           // builder.Services.AddScoped<IFileService, FileService>();
+            builder.Services.AddAuthentication()
+                .AddGoogle(opt =>
+                {
+                    IConfigurationSection GoogleAuthSection = builder.Configuration.GetSection("Authentication:Google");
+                    opt.ClientId = GoogleAuthSection["GoogleId"];
+                    opt.ClientSecret = GoogleAuthSection["GoogleSecret"];
+                })
+                .AddFacebook(opt =>
+                {
+                    IConfigurationSection FacebookAuthSection = builder.Configuration.GetSection("Authentication:Facebook");
+                    opt.ClientId = FacebookAuthSection["FacebookId"];
+                    opt.ClientSecret = FacebookAuthSection["FacebookSecret"];
+
+                });
+
+
+
+            // builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddScoped<ICategoryRepo, CategoryRepoService>();
             builder.Services.AddScoped<IProductRepo, ProductRepo>();
             builder.Services.AddScoped<ISellerRepo, SellerRepo>();

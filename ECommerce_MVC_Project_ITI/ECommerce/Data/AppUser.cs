@@ -8,7 +8,7 @@ namespace Identity.Data
 {
     public class AppUser:IdentityUser
     {
-        [System.ComponentModel.DataAnnotations.Required]
+        
         [MaxLength(50,ErrorMessage ="please Enter shorter name ")]
 
         [RegularExpression(@"[a-zA-Z]+", ErrorMessage = "Name Must be only characters")]

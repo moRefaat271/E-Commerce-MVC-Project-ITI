@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="7.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.4" />
@@ -47,14 +48,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Seller\Data\" />
-    <Folder Include="Areas\Seller\Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Areas\Seller\Views\SellerDashboard\Index.cshtml" />
     <None Include="Views\Categories\Create.cshtml" />
     <None Include="Views\Categories\Delete.cshtml" />
     <None Include="Views\Categories\Details.cshtml" />
