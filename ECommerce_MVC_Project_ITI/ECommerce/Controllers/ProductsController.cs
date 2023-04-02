@@ -8,39 +8,41 @@ using Microsoft.EntityFrameworkCore;
 using E_Commerce.Models;
 using Identity.Data;
 using Microsoft.AspNetCore.Authorization;
+using ECommerce.RepoServices;
 
 namespace ECommerce.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext _context;
 
-        public ProductsController(ApplicationDbContext context)
+        public IProductRepo ProductRepo { get; }
+        public ICategoryRepo CategoryRepo { get; }
+        public ISellerRepo sellerRepo { get; }
+
+        public ProductsController(IProductRepo productRepo,ICategoryRepo categoryRepo, ISellerRepo sellerRepo)
         {
-            _context = context;
+            ProductRepo = productRepo;
+            CategoryRepo = categoryRepo;
+            this.sellerRepo = sellerRepo;
         }
 
-        // GET: Products
-        public IActionResult Index()
-        {
-            var applicationDbContext = _context.Products.Include(p => p.Category).Include(p => p.Seller);
 
-            var lst = applicationDbContext.ToList();
-            return View( lst);
+
+        // GET: Products
+        public async Task<IActionResult> Index()
+        {
+            return await ProductRepo.GetAllProductAsync() != null ? View(await ProductRepo.GetAllProductAsync()) : Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
         }
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || ProductRepo.GetAllProductAsync == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.Seller)
-                .FirstOrDefaultAsync(m => m.ProductId == id);
+            var product = ProductRepo.GetProductByIdAsync((int)id);
             if (product == null)
             {
                 return NotFound();
@@ -50,11 +52,13 @@ namespace ECommerce.Controllers
         }
 
         // GET: Products/Create
-        [Authorize(Roles ="Seller")]
+        [Authorize(Roles = "Seller")]
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
-            ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id");
+            ViewData["CategoryId"] = new SelectList((System.Collections.IEnumerable)CategoryRepo.GetAllCategoriesAsync(), "Id", "Id");
+            
+            
+            ViewData["SellerId"] = new SelectList((System.Collections.IEnumerable)sellerRepo.GetAllProductAsync(), "Id", "Id");
             return View();
         }
 
@@ -68,12 +72,13 @@ namespace ECommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                ProductRepo.GetAllProductAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-            ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
+            ViewData["CategoryId"] = new SelectList((System.Collections.IEnumerable)CategoryRepo.GetAllCategoriesAsync(), "Id", "Id");
+            
+            
+            ViewData["SellerId"] = new SelectList((System.Collections.IEnumerable)sellerRepo.GetAllProductAsync(), "Id", "Id", product.SellerId);
             return View(product);
         }
 
@@ -81,18 +86,20 @@ namespace ECommerce.Controllers
         [Authorize(Roles = "Seller")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || ProductRepo.GetAllProductAsync() == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await ProductRepo.GetProductByIdAsync((int)id);
             if (product == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-            ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
+            ViewData["CategoryId"] = new SelectList((System.Collections.IEnumerable)CategoryRepo.GetAllCategoriesAsync(), "Id", "Id");
+           
+         
+             ViewData["SellerId"] = new SelectList((System.Collections.IEnumerable)CategoryRepo.GetAllCategoriesAsync(), "Id", "Id", product.SellerId);
             return View(product);
         }
 
@@ -113,8 +120,8 @@ namespace ECommerce.Controllers
             {
                 try
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                  ProductRepo.UpdateProductAsync(product);
+                   
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -129,8 +136,9 @@ namespace ECommerce.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
-            ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
+            ViewData["CategoryId"] = new SelectList((System.Collections.IEnumerable)CategoryRepo.GetAllCategoriesAsync(), "Id", "Id");
+         
+             ViewData["SellerId"] = new SelectList((System.Collections.IEnumerable)CategoryRepo.GetAllCategoriesAsync(), "Id", "Id", product.SellerId);
             return View(product);
         }
 
@@ -138,15 +146,13 @@ namespace ECommerce.Controllers
         [Authorize(Roles = "Seller")]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || ProductRepo.GetAllProductAsync() == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.Seller)
-                .FirstOrDefaultAsync(m => m.ProductId == id);
+            var product = ProductRepo.GetAllProductAsync();
+               
             if (product == null)
             {
                 return NotFound();
@@ -161,23 +167,21 @@ namespace ECommerce.Controllers
         [Authorize(Roles = "Seller")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Products == null)
+            if (ProductRepo.GetAllProductAsync() == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Products'  is null.");
             }
-            var product = await _context.Products.FindAsync(id);
+            var product = await ProductRepo.GetProductByIdAsync(id);
             if (product != null)
             {
-                _context.Products.Remove(product);
+                ProductRepo.DeleteProductAsync(id);
             }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-          return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
+            return ProductRepo.ProductExists(id);
         }
     }
 }
