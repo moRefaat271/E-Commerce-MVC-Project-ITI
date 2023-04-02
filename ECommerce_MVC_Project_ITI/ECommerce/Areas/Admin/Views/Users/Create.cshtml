@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*@model Identity.Data.AppUser*@
+@model ECommerce.ViewModel.CreateUserViewModel
+
+<h1>Create</h1>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password" class="control-label"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Role" class="control-label"></label>
+        <select asp-for="Role" class ="form-control" asp-items="@ViewBag.Roles"></select>
+    </div>
+    <div class="form-group">
+@*        <label asp-for="Role">Role</label>*@
+        @*<select asp-for="Role" name="Role">
+            @for (int i = 0; i < ViewBag.Roles.Count; i++)
+            {
+                <option value="@ViewBag.Roles[i].RoleID">@ViewBag.Roles[i].RoleName</option>
+            }
+        </select>*@
+            
+@*        <select asp-for="Role" class="form-control" asp-items="@ViewBag.Roles"></select>
+           <label asp-for="Role" class="control-label"></label>
+        <select asp-for="Role" class ="form-control" asp-items="@ViewBag.Roles"></select>*@
+    </div>
+@*    <div class="form-group">
+        <label asp-for="ConfirmPassword" class="control-label"></label>
+        <input asp-for="ConfirmPassword" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>*@
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

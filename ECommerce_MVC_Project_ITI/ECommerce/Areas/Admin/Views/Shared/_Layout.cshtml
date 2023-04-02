@@ -64,37 +64,37 @@
                                 <li>
                                     <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a asp-area="Admin" asp-controller="AdminDashboard">Dashboard</a></li>
-                                        <li><a asp-area="" asp-controller="Home">ITI Shop Home</a></li>
+                                        <li><a asp-area="Admin" asp-controller="AdminDashboard" asp-action="Index">Dashboard</a></li>
+                                        <li><a asp-area="" asp-controller="Home" asp-action="Index">ITI Shop Home</a></li>
                                     </ul>
                                 </li>
-                                <li>
+@*                                <li>
                                     <a><i class="fa fa-edit"></i> Users <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="products">Show Users</a></li>
                                         <li><a href="products/create">Add User</a></li>
                                         <li><a href="products/create">Add Admin</a></li>
                                     </ul>
-                                </li>
+                                </li>*@
                                 <li>
                                     <a><i class="fa fa-desktop"></i> Categories <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="general_elements.html">Show Categories</a></li>
-                                        <li><a href="media_gallery.html">Add Category</a></li>
+                                        <li><a asp-area="Admin" asp-controller="Categories" asp-action="Index">Show Categories</a></li>
+                                        <li><a asp-area="Admin" asp-controller="Categories" asp-action="Create">Add Category</a></li>
                                     </ul>
                                 </li>
-                                <li>
+@*                                <li>
                                     <a><i class="fa fa-table"></i> Sellers <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="tables.html">Show Sellers</a></li>
                                         <li><a href="tables_dynamic.html">Add Seller</a></li>
                                     </ul>
-                                </li>
+                                </li>*@
                                 <li>
                                     <a><i class="fa fa-bar-chart-o"></i> Products <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="chartjs2.html">Show Products</a></li>
-                                        <li><a href="chartjs.html">Add Product</a></li>
+                                        <li><a asp-area="Admin" asp-controller="Products" asp-action="Index">Show Products</a></li>
+                                        <li><a asp-area="Admin" asp-controller="Products" asp-action="Create">Add Product</a></li>
                                     </ul>
                                 </li>
                                 

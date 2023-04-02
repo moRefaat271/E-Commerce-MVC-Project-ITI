@@ -18,6 +18,9 @@ namespace E_Commerce.Models
         public decimal Price { get; set; }
         [Required]
         public string SellerId { get; set; }
+        [NotMapped]
+        [Display(Name = "Product Image")]
+        public IFormFile ImageFile { get; set; }
         public string Image { get; set; }
         [ForeignKey("SellerId")]
         public Seller? Seller { get; set; }

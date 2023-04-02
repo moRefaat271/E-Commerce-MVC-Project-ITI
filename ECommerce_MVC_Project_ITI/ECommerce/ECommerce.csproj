@@ -48,6 +48,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\AdminDashboard\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <None Include="Areas\Admin\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <None Include="Areas\Seller\Views\Products\Create.cshtml" />
+    <None Include="Areas\Seller\Views\Products\Delete.cshtml" />
+    <None Include="Areas\Seller\Views\Products\Details.cshtml" />
+    <None Include="Areas\Seller\Views\Products\Edit.cshtml" />
+    <None Include="Areas\Seller\Views\Products\Index.cshtml" />
+    <None Include="Areas\Seller\Views\SellerDashboard\Index.cshtml" />
+    <None Include="Areas\Seller\Views\Shared\_Layout.cshtml" />
+    <None Include="Areas\Seller\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Seller\Views\_ViewStart.cshtml" />
     <None Include="Views\Categories\Create.cshtml" />
     <None Include="Views\Categories\Delete.cshtml" />
     <None Include="Views\Categories\Details.cshtml" />

@@ -7,20 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using E_Commerce.Models;
 using Identity.Data;
-using Microsoft.AspNetCore.Authorization;
-using System.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce.Areas.Seller.Controllers
 {
     [Area("Seller")]
-    [Authorize(Roles = "Seller")]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Seller/Products
@@ -51,11 +51,16 @@ namespace ECommerce.Areas.Seller.Controllers
         }
 
         // GET: Seller/Products/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
-            //var sellers = _context.AppUsers.Where(s => s.);
-            ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            //ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Name");
+            
+            var seller = await _userManager.GetUserAsync(User);
+            var sellerId = seller?.Id;
+            ViewBag.SellerId = sellerId;
+            //ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Name", sellerId);
+
             return View();
         }
 
@@ -64,7 +69,7 @@ namespace ECommerce.Areas.Seller.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,Price,SellerId,Image,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,ProductDescription,NumInStock,Price,SellerId,Image,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +77,7 @@ namespace ECommerce.Areas.Seller.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
             ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
             return View(product);
         }
@@ -90,7 +95,7 @@ namespace ECommerce.Areas.Seller.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
             ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
             return View(product);
         }
@@ -100,7 +105,7 @@ namespace ECommerce.Areas.Seller.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Price,SellerId,Image,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,ProductDescription,NumInStock,Price,SellerId,Image,CategoryId")] Product product)
         {
             if (id != product.ProductId)
             {
@@ -127,7 +132,7 @@ namespace ECommerce.Areas.Seller.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
             ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
             return View(product);
         }

@@ -120,9 +120,16 @@
                             else
                             {
 
-                            <input class="btn_3" type="submit" value="proceed to payPal" />
+                            <input class="btn_3" type="submit" value="proceed to Checkout" />
                             }
-                            @*<a class="btn_3" asp-controller="payPal"></a>*@
+
+
+                            <div class="col-md-12">
+                                <a class="btn_3" asp-controller="payPal" asp-action="Index"></a>
+                                <a class="btn_3" asp-controller="stripe" asp-action="Index"></a>
+                            </div>
+
+                            
 
                         </form>
 

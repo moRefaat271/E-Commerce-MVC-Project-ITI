@@ -64,15 +64,15 @@
                                 <li>
                                     <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a asp-area="Admin" asp-controller="AdminDashboard">Dashboard</a></li>
-                                        <li><a asp-area="" asp-controller="Home">ITI Shop Home</a></li>
+                                        <li><a asp-area="Seller" asp-controller="SellerDashboard" asp-action="Index">Dashboard</a></li>
+                                        <li><a asp-area="" asp-controller="Home" asp-action="Index">ITI Shop Home</a></li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-edit"></i> Products <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="products">Show Products</a></li>
-                                        <li><a href="products/create">Add Product</a></li>
+                                        <li><a asp-area="Seller" asp-controller="Products" asp-action="Index">Show Products</a></li>
+                                        <li><a asp-area="Seller" asp-controller="Products" asp-action="Create">Add Product</a></li>
                                     </ul>
                                 </li>
                                 <li>

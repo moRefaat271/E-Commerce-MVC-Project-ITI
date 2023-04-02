@@ -15,7 +15,12 @@ namespace Identity.Models
         [RegularExpression(@"[a-zA-Z]+", ErrorMessage = " Category Name Must be only characters")]
         [Display(Name = "Category Name")]
         public string Name { get; set; }
+
         [System.ComponentModel.DataAnnotations.Required]
+        [NotMapped]
+        [Display(Name = "Category Image")]
+        public IFormFile ImageFile { get; set; }
+        //[System.ComponentModel.DataAnnotations.Required]
         public string Image { get; set; }
         public virtual ICollection<Product>? Products { get; set; } = new HashSet<Product>();
     }
