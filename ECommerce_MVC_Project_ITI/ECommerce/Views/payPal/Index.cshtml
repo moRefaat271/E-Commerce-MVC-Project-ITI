@@ -42,7 +42,7 @@
 
             onAuthorize: function (data, actions) {
                 actions.payment.execute()
-                var url = '@Url.Action("Index", "Contact", new {})';
+                var url = '@Url.Action("Success", "PayPal", new {})';
                 window.location.href = url;
             }
 

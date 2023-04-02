@@ -10,5 +10,9 @@ namespace ECommerce.Controllers
         {
             return View();
         }
+        public IActionResult Success()
+        {
+            return View("PaymentSuccess");
+        }
     }
 }
