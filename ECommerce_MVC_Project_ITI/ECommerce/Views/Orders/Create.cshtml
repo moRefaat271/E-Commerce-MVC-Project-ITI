@@ -1,0 +1,247 @@
+﻿@using ECommerce.Models;
+@using Identity.Data;
+@model E_Commerce.Models.Order
+@inject ApplicationDbContext _context
+
+@{
+    ViewData["Title"] = "Create";
+     decimal subtotal = 0;
+
+}
+<form asp-action="Create">
+
+
+    <div class="form-group">
+      
+    </div>
+  
+   
+   
+    
+    <div class="form-group">
+    </div>
+</form>
+
+<main>
+    <!--================Checkout Area =================-->
+    <section class="checkout_area">
+        <div class="container">
+
+            <div class="billing_details">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3>Billing Details</h3>
+
+
+                        <form class="row contact_form" asp-controller="Orders" asp-action="Create" method="post" novalidate="novalidate">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="col-md-6 form-group p_star">
+                                <select asp-for="AppUserId" class="form-control" id="first" placeholder="Full Name" asp-items="ViewBag.AppUserId"></select>
+                            </div>
+
+                           @* <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="first" name="name" placeholder="Full Name" />
+                            </div>
+*@
+
+
+
+                           
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="number" name="number" placeholder="Phone number" />
+                            </div>
+
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="email" name="compemailany" placeholder="Email Address" />
+                            </div>
+
+
+
+
+                            <div class="col-md-12 form-group p_star">
+                                <input asp-for="Country" type="text" class="form-control" placeholder="Country" />
+                                <span asp-validation-for="Country" class="text-danger"></span>
+
+                            </div>
+
+
+                          
+
+
+                            <div class="col-md-12 form-group p_star">
+                                <input asp-for="Street" type="text" class="form-control" id="add1"  placeholder="Street" />
+                                <span asp-validation-for="Street" class="text-danger"></span>
+                            </div>
+                          
+
+
+                            <div class="col-md-12 form-group p_star">
+                                <input asp-for="City" type="text" class="form-control" id="city" name="city" placeholder="Town/City" />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+
+                   
+                      
+
+
+
+
+                            <div class="col-md-12 form-group">
+                                <input asp-for="PostalCode" type="text" class="form-control" id="zip" name="PostalCode" placeholder="Postcode/ZIP" />
+                                <span asp-validation-for="PostalCode" class="text-danger"></span>
+                            </div>
+
+
+@*
+                            <div class="col-md-12 form-group">
+                                <input asp-for="Total" class="form-control" placeholder="Tot" />
+                                <span asp-validation-for="Total" class="text-danger"></span>
+                            </div>
+*@
+
+
+
+                            <div class="col-md-12 form-group">
+                                <div class="creat_account">
+                                    <h3>Shipping Details</h3>
+                                    <input type="checkbox" id="f-option3" name="selector" />
+                                    <label for="f-option3">Ship to a different address?</label>
+                                </div>
+                                <textarea class="form-control" name="message" id="message" rows="1"
+                                          placeholder="Order Notes"></textarea>
+                            </div>
+                            <input type="hidden" name="Total" value="@subtotal" />
+                            
+                            @if (((List<CartProduct>)ViewData["ProductsOfCart"])?.Count <= 0)
+                            {
+                            <input class="btn_3" type="submit" value="proceed to payPal" disabled />
+                            }
+                            else
+                            {
+
+                            <input class="btn_3" type="submit" value="proceed to payPal" />
+                            }
+                            @*<a class="btn_3" asp-controller="payPal"></a>*@
+
+                        </form>
+
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="order_box">
+                            <h2>Your Order</h2>
+                            <ul class="list">
+                                <li>
+                                    <a href="#">
+                                        Product
+                                        <span>Total</span>
+                                    </a>
+                                </li>
+                               
+
+                                @if (ViewData["ProductsOfCart"] != null)
+                                {
+                                    foreach (var cartProduct in (List<CartProduct>)ViewData["ProductsOfCart"])
+                                    {
+                                        var product = cartProduct.Product;
+                                        if (product != null)
+                                        {
+                                            <li>
+                                                <a href="#">
+                                                    @product.Name
+                                                    <span class="middle">x @cartProduct.Quantity</span>
+                                                    <span class="last">$@(product.Price * cartProduct.Quantity)</span>
+                                                </a>
+                                            </li>
+                                            subtotal +=(product.Price * cartProduct.Quantity);
+                                        }
+                                    }
+                                    subtotal -= 50;
+                                }
+
+                                
+
+
+                          @*      
+                                <li>
+                                    <a href="#">
+                                        Fresh Tomatoes
+                                        <span class="middle">x 02</span>
+                                        <span class="last">$720.00</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Fresh Brocoli
+                                        <span class="middle">x 02</span>
+                                        <span class="last">$720.00</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="list list_2">
+                                <li>
+                                    <a href="#">
+                                        Subtotal
+                                        <span>$2160.00</span>
+                                    </a>
+                                </li>*@
+
+
+                                <li>
+                                    <a href="#">
+                                        Shipping
+                                        <span>Flat rate: $50.00</span>
+                                    </a>
+                                </li>
+
+                            
+                                <li>
+                                    <a href="#">
+                                        Total
+                                        <span>$ @subtotal </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="payment_item">
+                                <div class="radion_btn">
+                                    <input type="radio" id="f-option5" name="selector" />
+                                    <label for="f-option5">Check payments</label>
+                                    <div class="check"></div>
+                                </div>
+                                <p>
+                                    Please send a check to Store Name, Store Street, Store Town,
+                                    Store State / County, Store Postcode.
+                                </p>
+                            </div>
+                            <div class="payment_item active">
+                                <div class="radion_btn">
+                                    <input type="radio" id="f-option6" name="selector" />
+                                    <label for="f-option6">Paypal </label>
+                                    <img src="img/product/single-product/card.jpg" alt="" />
+                                    <div class="check"></div>
+                                </div>
+                                <p>
+                                    Please send a check to Store Name, Store Street, Store Town,
+                                    Store State / County, Store Postcode.
+                                </p>
+                            </div>
+                            <div class="creat_account">
+                                <input type="checkbox" id="f-option4" name="selector" />
+                                <label for="f-option4">I’ve read and accept the </label>
+                                <a href="#">terms & conditions*</a>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Checkout Area =================-->
+</main>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
