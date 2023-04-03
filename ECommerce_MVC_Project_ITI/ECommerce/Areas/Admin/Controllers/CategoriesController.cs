@@ -72,8 +72,8 @@ namespace ECommerce.Areas.Admin.Controllers
                     if (result.Item1 == 1)
                     {
                         var oldImage = category.Image;
-                        category.Image = result.Item2;
-                        var deleteResult = _fileService.DeleteImage(oldImage);
+                        category.Image = "/uploads/" + result.Item2;
+                    var deleteResult = _fileService.DeleteImage(oldImage);
                     }
             }
 
@@ -122,7 +122,7 @@ namespace ECommerce.Areas.Admin.Controllers
                         if (result.Item1 == 1)
                         {
                             var oldImage = category.Image;
-                            category.Image = result.Item2;
+                            category.Image = "/uploads/" + result.Item2;
                             //await _context.SaveChangesAsync();
                             var deleteResult = _fileService.DeleteImage(oldImage);
                         }

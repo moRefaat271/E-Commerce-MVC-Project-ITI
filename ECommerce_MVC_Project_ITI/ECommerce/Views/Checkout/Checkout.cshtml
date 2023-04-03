@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<h3 style="text-align: center; margin-top:30px; margin-bottom: 125px">Choose the payment method</h3>
+<div class="container" style="text-align: center">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3 text-center" style="border-radius:5px">
+                <a class="btn btn-danger" asp-action="Index" asp-controller="paypal">
+                    PayPal
+                </a>
+            </div>
+            <div class="col-md-3 text-center">
+                    <a class="btn btn-danger" asp-action="Index" asp-controller="Stripe" >
+                    Stripe
+                </a>
+            </div>
+        </div>
+    </div>

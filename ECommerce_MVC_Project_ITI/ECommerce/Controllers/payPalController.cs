@@ -22,6 +22,7 @@ namespace ECommerce.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             var money =_context.Orders.Where(o => o.AppUserId == user.Id).OrderByDescending(o => o.OrderDate).FirstOrDefault();
+            ViewBag.money = money;
             return View();
         }
         public IActionResult Success()

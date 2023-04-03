@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.EntityFrameworkCore;
+using Identity.Data;
+using E_Commerce.Models;
 
 namespace Identity.Controllers
 {
@@ -11,10 +14,12 @@ namespace Identity.Controllers
     {
 
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext _context)
         {
             _logger = logger;
+            this._context = _context; 
         }
 
         public IActionResult Error()
@@ -43,8 +48,41 @@ namespace Identity.Controllers
 
         public IActionResult Index()
         {
+            Random rnd = new();
 
-            return View();
+            var applicationDbContext = _context.Products.Include(p => p.Category).Include(p => p.Seller);
+            var lst = applicationDbContext.ToList();
+            int maxProductId;
+            int randomProductId;
+
+            if (lst.Count > 6)
+            {
+                List<Product> randomProducts = new();
+
+                int i = 0;
+                //List<int> UsedNumberInRandom = new();
+                while (i <= 5)
+                {
+                    maxProductId = _context.Products.Max(p => p.ProductId);
+                    randomProductId = rnd.Next(1, maxProductId + 1);
+
+                    Product filteredProducts = lst.Where(P => P.ProductId == randomProductId).FirstOrDefault();
+                    if (filteredProducts == null)
+                    {
+                        i--;
+                    }
+                    else
+                    {
+                        randomProducts.Add(filteredProducts);
+                    }
+                    i++;
+                }
+                return View(randomProducts);
+
+            }
+
+
+            return View(lst);
         }
 
 

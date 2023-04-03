@@ -38,7 +38,8 @@
             @Html.DisplayNameFor(model => model.Image)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
+            @*@Html.DisplayFor(model => model.Image)*@
+            <img style="width:50px;" src="@Url.Content(@Model.Image)" title="Image Title" alt="Image Description" />
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Seller)

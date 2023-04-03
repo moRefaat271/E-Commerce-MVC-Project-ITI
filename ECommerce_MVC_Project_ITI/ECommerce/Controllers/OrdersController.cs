@@ -125,7 +125,7 @@ namespace ECommerce.Controllers
                     orderToEdit.Total = sum;
 
                 await _context.SaveChangesAsync();
-               return RedirectToAction("index", "PayPal");
+                return RedirectToAction("Checkout", "Checkout");
             }
             catch
             {

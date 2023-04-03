@@ -36,10 +36,9 @@
                         <form class="row contact_form" asp-controller="Orders" asp-action="Create" method="post" novalidate="novalidate">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                            @*<div class="col-md-6 form-group p_star">
+                            <div class="col-md-6 form-group p_star">
                                 <select asp-for="AppUserId" class="form-control" id="first" placeholder="Full Name" asp-items="ViewBag.AppUserId"></select>
                             </div>
-*@
                            @* <div class="col-md-6 form-group p_star">
                                 <input type="text" class="form-control" id="first" name="name" placeholder="Full Name" />
                             </div>
@@ -124,10 +123,10 @@
                             }
 
 
-                            <div class="col-md-12">
+                            @*<div class="col-md-12">
                                 <a class="btn_3" asp-controller="payPal" asp-action="Index"></a>
                                 <a class="btn_3" asp-controller="stripe" asp-action="Index"></a>
-                            </div>
+                            </div>*@
 
                             
 

@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\ECommerce.bundle.scp.css"
     },
     {
+      "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\224c80f3-b824-469e-939b-cd2e65893153.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\224c80f3-b824-469e-939b-cd2e65893153.jpg"
+    },
+    {
+      "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\3c1391db-0572-4050-be7e-d4e136bebf4d.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\3c1391db-0572-4050-be7e-d4e136bebf4d.jpg"
+    },
+    {
       "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\3d8ef066-395f-4a81-8f22-65e690b176ba.jpg",
       "PackagePath": "staticwebassets\\Uploads\\3d8ef066-395f-4a81-8f22-65e690b176ba.jpg"
     },
@@ -13,12 +21,20 @@
       "PackagePath": "staticwebassets\\Uploads\\5ccce18c-8e96-43b2-888a-cb7787e9ebb0.jpg"
     },
     {
+      "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\8108442c-4502-44dd-9686-d33d41d34533.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\8108442c-4502-44dd-9686-d33d41d34533.jpg"
+    },
+    {
       "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\a4aaaf47-b49b-4f95-9fad-8dd991db6a56.jpg",
       "PackagePath": "staticwebassets\\Uploads\\a4aaaf47-b49b-4f95-9fad-8dd991db6a56.jpg"
     },
     {
       "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\b1fbc5a3-fcea-4226-b728-0805c1913232.jpg",
       "PackagePath": "staticwebassets\\Uploads\\b1fbc5a3-fcea-4226-b728-0805c1913232.jpg"
+    },
+    {
+      "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\b1fd6897-561d-43d0-b6b0-6afb4de6f22a.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\b1fd6897-561d-43d0-b6b0-6afb4de6f22a.jpg"
     },
     {
       "Id": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\assets\\css\\all.css",

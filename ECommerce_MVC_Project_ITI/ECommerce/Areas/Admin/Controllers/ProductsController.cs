@@ -127,7 +127,7 @@ namespace ECommerce.Areas.Admin.Controllers
                         if (result.Item1 == 1)
                         {
                             var oldImage = product.Image;
-                            product.Image = result.Item2;
+                            product.Image = "/uploads/" + result.Item2;
                             var deleteResult = _fileService.DeleteImage(oldImage);
                         }
                     }

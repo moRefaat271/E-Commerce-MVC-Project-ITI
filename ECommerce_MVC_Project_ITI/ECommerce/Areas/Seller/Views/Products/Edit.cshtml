@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProductId" />
             <div class="form-group">
@@ -34,14 +34,15 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SellerId" class="control-label"></label>
+@*                <label asp-for="SellerId" class="control-label"></label>
                 <select asp-for="SellerId" class="form-control" asp-items="ViewBag.SellerId"></select>
-                <span asp-validation-for="SellerId" class="text-danger"></span>
+                <span asp-validation-for="SellerId" class="text-danger"></span>*@
+                <input asp-for="SellerId" type="hidden" value="@ViewBag.SellerId" />
             </div>
             <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
+                <label asp-for="ImageFile">Image</label>
+                <input asp-for="ImageFile" class="form-control-file"/>
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>

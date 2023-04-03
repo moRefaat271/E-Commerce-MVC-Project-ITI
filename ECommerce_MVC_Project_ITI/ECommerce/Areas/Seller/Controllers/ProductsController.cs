@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using E_Commerce.Models;
 using Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using BIM_App.Servicies;
 
 namespace ECommerce.Areas.Seller.Controllers
 {
@@ -16,11 +17,13 @@ namespace ECommerce.Areas.Seller.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IFileService _fileService;
 
-        public ProductsController(ApplicationDbContext context, UserManager<AppUser> userManager)
+        public ProductsController(ApplicationDbContext context, UserManager<AppUser> userManager, IFileService fileService)
         {
             _context = context;
             _userManager = userManager;
+            this._fileService = fileService;
         }
 
         // GET: Seller/Products
@@ -69,17 +72,28 @@ namespace ECommerce.Areas.Seller.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,ProductDescription,NumInStock,Price,SellerId,Image,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,ProductDescription,NumInStock,Price,SellerId,ImageFile,CategoryId")] Product product)
         {
-            if (ModelState.IsValid)
-            {
+            /*if (ModelState.IsValid)
+            {*/
+                product.Image = product.ImageFile.FileName;
+                if (product.ImageFile != null)
+                {
+                    var result = _fileService.SaveImage(product.ImageFile);
+                    if (result.Item1 == 1)
+                    {
+                        var oldImage = product.Image;
+                        product.Image = "/uploads/" + result.Item2;
+                    var deleteResult = _fileService.DeleteImage(oldImage);
+                    }
+                }
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
+            /*}*/
+            /*ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
             ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
-            return View(product);
+            return View(product);*/
         }
 
         // GET: Seller/Products/Edit/5
@@ -95,8 +109,12 @@ namespace ECommerce.Areas.Seller.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
-            ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
+            /*ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Name", product.SellerId);*/
+            var seller = await _userManager.GetUserAsync(User);
+            var sellerId = seller?.Id;
+            ViewBag.SellerId = sellerId;
+
             return View(product);
         }
 
@@ -105,17 +123,27 @@ namespace ECommerce.Areas.Seller.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,ProductDescription,NumInStock,Price,SellerId,Image,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,ProductDescription,NumInStock,Price,SellerId,ImageFile,CategoryId")] Product product)
         {
             if (id != product.ProductId)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            /*if (ModelState.IsValid)
+            {*/
                 try
                 {
+                    if (product.ImageFile != null)
+                    {
+                        var result = _fileService.SaveImage(product.ImageFile);
+                        if (result.Item1 == 1)
+                        {
+                            var oldImage = product.Image;
+                            product.Image = "/uploads/" + result.Item2;
+                            var deleteResult = _fileService.DeleteImage(oldImage);
+                        }
+                    }
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -131,10 +159,10 @@ namespace ECommerce.Areas.Seller.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
+            /*}*/
+            /*ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
             ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
-            return View(product);
+            return View(product);*/
         }
 
         // GET: Seller/Products/Delete/5

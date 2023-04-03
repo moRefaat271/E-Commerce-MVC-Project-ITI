@@ -30,7 +30,7 @@
             <td>
 @*                @Html.DisplayFor(modelItem => item.Image)*@
                     
-                    <img style="width:50px;" src="@Url.Content("~/uploads/" + item.Image)" title="Image Title" alt="Image Description" />
+                    <img style="width:50px;" src="@Url.Content(item.Image)" title="Image Title" alt="Image Description" />
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

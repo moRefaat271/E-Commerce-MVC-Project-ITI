@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Wv1KFjEA20kUCXWCLq7jOFlAOhdQZmhjJubZ8tGBdAQ=",
+  "Hash": "vzm/cECP/IqqVZfXCLGAWvLkQhMG8jLWJg4b1tWuRQ0=",
   "Source": "ECommerce",
   "BasePath": "_content/ECommerce",
   "Mode": "Default",
@@ -7905,6 +7905,40 @@
       "OriginalItemSpec": "wwwroot\\src\\scss\\daterangepicker.scss"
     },
     {
+      "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\224c80f3-b824-469e-939b-cd2e65893153.jpg",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "Uploads/224c80f3-b824-469e-939b-cd2e65893153.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\224c80f3-b824-469e-939b-cd2e65893153.jpg"
+    },
+    {
+      "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\3c1391db-0572-4050-be7e-d4e136bebf4d.jpg",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "Uploads/3c1391db-0572-4050-be7e-d4e136bebf4d.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\3c1391db-0572-4050-be7e-d4e136bebf4d.jpg"
+    },
+    {
       "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\3d8ef066-395f-4a81-8f22-65e690b176ba.jpg",
       "SourceId": "ECommerce",
       "SourceType": "Discovered",
@@ -7939,6 +7973,23 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\5ccce18c-8e96-43b2-888a-cb7787e9ebb0.jpg"
     },
     {
+      "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\8108442c-4502-44dd-9686-d33d41d34533.jpg",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "Uploads/8108442c-4502-44dd-9686-d33d41d34533.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\8108442c-4502-44dd-9686-d33d41d34533.jpg"
+    },
+    {
       "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\a4aaaf47-b49b-4f95-9fad-8dd991db6a56.jpg",
       "SourceId": "ECommerce",
       "SourceType": "Discovered",
@@ -7971,6 +8022,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\b1fbc5a3-fcea-4226-b728-0805c1913232.jpg"
+    },
+    {
+      "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\b1fd6897-561d-43d0-b6b0-6afb4de6f22a.jpg",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "Uploads/b1fd6897-561d-43d0-b6b0-6afb4de6f22a.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\b1fd6897-561d-43d0-b6b0-6afb4de6f22a.jpg"
     },
     {
       "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\vendors\\animate.css\\.bower.json",
