@@ -29,7 +29,8 @@ namespace ECommerce.Areas.Seller.Controllers
         // GET: Seller/Products
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Products.Include(p => p.Category).Include(p => p.Seller);
+            var user = await _userManager.GetUserAsync(User);
+            var applicationDbContext = _context.Products.Include(p => p.Category).Include(p => p.Seller).Where(s=>s.Seller.Id == user.Id);
             return View(await applicationDbContext.ToListAsync());
         }
 

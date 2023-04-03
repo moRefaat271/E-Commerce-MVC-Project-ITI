@@ -133,7 +133,14 @@ namespace Identity.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    
+                    if (User.IsInRole("Seller"))
+                    {
+                        return RedirectToAction("sellerDashboard", "seller");
+                    }
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("AdminDashboard", "Admin");
+                    }
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

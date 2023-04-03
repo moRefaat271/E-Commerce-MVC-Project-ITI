@@ -123,7 +123,8 @@ namespace Identity.Areas.Identity.Pages.Account
                     //}
 
                     var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-                // This doesn't count login failures towards account lockout
+                
+                    // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 if (result.RequiresTwoFactor)
                 {
@@ -131,11 +132,21 @@ namespace Identity.Areas.Identity.Pages.Account
                 }
                 if (result.Succeeded)
                 {
+            if (User.IsInRole("Seller"))
+            {
+                return RedirectToAction("sellerDashboard", "seller");
+            }
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("AdminDashboard", "Admin");
+            }
                     _logger.LogInformation("User logged in.");
                         if (returnUrl == "/Cart/AddToCart")
                         {
+                            
                             return RedirectToAction("Index", "Products");
                         }
+                        
                         return LocalRedirect(returnUrl);
                 }
                 if (result.IsLockedOut)
