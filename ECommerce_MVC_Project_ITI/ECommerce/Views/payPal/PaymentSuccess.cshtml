@@ -1,39 +1,107 @@
-﻿@{
+﻿@using Identity.Data;
+@using Microsoft.AspNetCore.Identity;
+@inject ApplicationDbContext _context;
+@inject  UserManager<AppUser> _userManager;
+
+@{
     ViewData["Title"] = "Payment Success";
 }
+
+@model ECommerce.Models.Cart
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Payment Successful</h1>
-            <p>Thank you for your payment. Your order has been received and will be processed shortly.</p>
+            <bold>
+                <p class="text-center">Thank you for your payment. Your order has been received and will be processed shortly.</p></bold>
             <hr>
-            <h2>Order Details</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Product 1</td>
-                        <td>1</td>
-                        <td>$100.00</td>
-                    </tr>
-                    <tr>
-                        <td>Product 2</td>
-                        <td>2</td>
-                        <td>$200.00</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Total</td>
-                        <td>$300.00</td>
-                    </tr>
-                </tbody>
-            </table>
+           
         </div>
     </div>
 </div>
+
+@{
+    if (Model == null)
+    {
+        <h3 style="text-align:center">Your cart is empty</h3>
+    }
+    else if (Model?.CartProducts?.Count == 0)
+    {
+        <h3 style="text-align:center">Your cart is empty</h3>
+    }
+    else
+    {
+        <main>
+            <!--================Cart Area =================-->
+            <section class="cart_area">
+                <div class="container">
+                    <div class="cart_inner">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Total</th>                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        float subtotal = 0;
+                                    }
+                                    @foreach (var item in Model?.CartProducts)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="media">
+                                                    <div class="d-flex">
+                                                        <img src="@item?.Product?.Image" alt="" />
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <p>@item?.Product?.Name</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>@item?.Price</h5>
+                                            </td>
+                                            <td>
+                                                <label>@item?.Quantity</label>
+                                            </td>
+                                            <td>
+                                                @{
+                                                    float total = (float)item.Price * (int)item.Quantity;
+                                                    subtotal += total;
+                                                }
+                                                <h5>@total</h5>
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <h5>Subtotal</h5>
+                                        </td>
+                                        <td>
+                                            <h5>@subtotal</h5>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--================End Cart Area =================-->
+        </main>
+    }
+}
+
+@foreach (var item in Model.CartProducts)
+{
+    _context.CartProducts.Remove(item);
+    _context.SaveChanges();
+}

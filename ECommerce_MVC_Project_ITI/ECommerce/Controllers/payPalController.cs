@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Controllers
 {
@@ -21,13 +22,16 @@ namespace ECommerce.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
-            var money =_context.Orders.Where(o => o.AppUserId == user.Id).OrderByDescending(o => o.OrderDate).FirstOrDefault();
-            ViewBag.money = money;
-            return View();
+            var order =_context.Orders.Where(o => o.AppUserId == user.Id).OrderByDescending(o => o.OrderDate).FirstOrDefault();
+            ViewBag.money = order.Total;
+            return View(order);
         }
-        public IActionResult Success()
+        public async Task<IActionResult> Success()
         {
-            return View("PaymentSuccess");
+            var user = await _userManager.GetUserAsync(User);
+
+            var cart = _context.Carts?.Include(c => c.CartProducts).ThenInclude(p => p.Product).FirstOrDefault(c => c.AppUserId == user.Id);
+            return View("PaymentSuccess", cart);
         }
     }
 }

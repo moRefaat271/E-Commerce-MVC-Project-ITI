@@ -1,4 +1,4 @@
-﻿
+﻿@model E_Commerce.Models.Order
 <h2 style="text-align: center">Pay with PayPal</h2>
 
 <button style="    margin-left: 45%;
@@ -7,7 +7,7 @@
 
 
 <script>
-    var orderTotal = 100;
+    var orderTotal = @Model.Total;
 </script>
 
 @section Scripts{
@@ -52,4 +52,6 @@
         }, '#paypal-btn');
     </script>
     }
+
+
 

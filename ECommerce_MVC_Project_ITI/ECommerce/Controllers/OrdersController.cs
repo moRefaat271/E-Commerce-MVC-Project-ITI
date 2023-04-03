@@ -87,7 +87,7 @@ namespace ECommerce.Controllers
                     AppUserId = AppUserId
                  };
                 _context.Add(order);
-                
+                _context.SaveChanges();
                 //return RedirectToAction(nameof(Index));
             }
             var user = await _userManager.GetUserAsync(User);
@@ -120,12 +120,12 @@ namespace ECommerce.Controllers
                 var orderToEdit = _context.Orders
                     .Where(o => o.AppUserId == user.Id)
                     .OrderByDescending(o => o.OrderDate)
-                    .LastOrDefault();
+                    .FirstOrDefault();
                 if (orderToEdit != null)
                     orderToEdit.Total = sum;
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Checkout", "Checkout");
+                return RedirectToAction("Index", "PayPal");
             }
             catch
             {
