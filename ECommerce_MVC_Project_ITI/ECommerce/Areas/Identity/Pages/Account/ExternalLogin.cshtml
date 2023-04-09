@@ -4,30 +4,73 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
-<h2 id="external-login-title">Associate your @Model.ProviderDisplayName account.</h2>
-<hr />
+<div class="d-flex justify-content-center align-items-center flex-column vh-100">
+    <h1>@ViewData["Title"]</h1>
+    <h2 id="external-login-title" class="mb-4">Associate your @Model.ProviderDisplayName account.</h2>
 
-<p id="external-login-description" class="text-info">
-    You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
-    Please enter an email address for this site below and click the Register button to finish
-    logging in.
-</p>
+    <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="w-100">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-4" role="alert"></div>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="Please enter your email."/>
-                <label asp-for="Input.Email" class="form-label"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
-    </div>
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Name" class="form-control" autocomplete="fullName" placeholder="Please enter your full Name." />
+            <label asp-for="Input.Name" class="form-label"></label>
+            <span asp-validation-for="Input.Name" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="Please enter your email." />
+            <label asp-for="Input.Email" class="form-label"></label>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <button type="submit" class="genric-btn primary-border circle arrow"><span class="lnr lnr-arrow-right"></span>Register</button>
+    </form>
+
+    <p id="external-login-description" class="mt-4">
+        You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
+        Please enter an email address for this site above and click the Register button to finish logging in.
+    </p>
+
+    <partial name="_ValidationScriptsPartial" />
 </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    form {
+        max-width: 400px;
+    }
+
+    .form-floating input.form-control {
+        height: 50px;
+        padding: 15px;
+    }
+
+    .form-floating label.form-label {
+        top: 20px;
+        left: 20px;
+        font-size: 16px;
+        color: #6c757d;
+    }
+
+    .genric-btn.primary-border {
+        background: transparent;
+        border-color: #007bff;
+        color: #007bff;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+        .genric-btn.primary-border:hover {
+            background: #007bff;
+            color: #fff;
+        }
+
+    .lnr {
+        display: inline-block;
+        font-size: 20px;
+        margin-left: 10px;
+        transform: translateY(-2px);
+    }
+</style>

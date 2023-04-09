@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using BIM_App.Servicies;
 using Identity.Data;
 using Identity.Models;
-using Microsoft.AspNetCore.Hosting;
-using BIM_App.Servicies;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Areas.Admin.Controllers
 {
@@ -27,9 +21,9 @@ namespace ECommerce.Areas.Admin.Controllers
         // GET: Admin/Categories
         public async Task<IActionResult> Index()
         {
-              return _context.Categories != null ? 
-                          View(await _context.Categories.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
+            return _context.Categories != null ?
+                        View(await _context.Categories.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
         }
 
         // GET: Admin/Categories/Details/5
@@ -69,18 +63,18 @@ namespace ECommerce.Areas.Admin.Controllers
             if (category.ImageFile != null)
             {
                 var result = _fileService.SaveImage(category.ImageFile);
-                    if (result.Item1 == 1)
-                    {
-                        var oldImage = category.Image;
-                        category.Image = "/uploads/" + result.Item2;
+                if (result.Item1 == 1)
+                {
+                    var oldImage = category.Image;
+                    category.Image = "/uploads/" + result.Item2;
                     var deleteResult = _fileService.DeleteImage(oldImage);
-                    }
+                }
             }
 
 
-                _context.Add(category);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            _context.Add(category);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
             /*}*/
             //return View(category);
         }
@@ -106,42 +100,42 @@ namespace ECommerce.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,[Bind("Id,Name,ImageFile")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ImageFile")] Category category)
         {
             if (id != category.Id)
             {
                 return NotFound();
             }
-            if (category!=null)
-            category.Image = category.ImageFile.FileName;
-                try
+            if (category != null)
+                category.Image = category.ImageFile.FileName;
+            try
+            {
+                if (category.ImageFile != null)
                 {
-                    if (category.ImageFile != null)
+                    var result = _fileService.SaveImage(category.ImageFile);
+                    if (result.Item1 == 1)
                     {
-                        var result = _fileService.SaveImage(category.ImageFile);
-                        if (result.Item1 == 1)
-                        {
-                            var oldImage = category.Image;
-                            category.Image = "/uploads/" + result.Item2;
-                            //await _context.SaveChangesAsync();
-                            var deleteResult = _fileService.DeleteImage(oldImage);
-                        }
-                    }
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoryExists(category.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        var oldImage = category.Image;
+                        category.Image = "/uploads/" + result.Item2;
+                        //await _context.SaveChangesAsync();
+                        var deleteResult = _fileService.DeleteImage(oldImage);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                _context.Update(category);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CategoryExists(category.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Admin/Categories/Delete/5
@@ -176,14 +170,14 @@ namespace ECommerce.Areas.Admin.Controllers
             {
                 _context.Categories.Remove(category);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CategoryExists(int id)
         {
-          return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

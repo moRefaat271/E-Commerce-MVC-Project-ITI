@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BIM_App.Servicies;
+using E_Commerce.Models;
+using Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using E_Commerce.Models;
-using Identity.Data;
-using BIM_App.Servicies;
-using Identity.Models;
 
 namespace ECommerce.Areas.Admin.Controllers
 {
@@ -78,9 +73,9 @@ namespace ECommerce.Areas.Admin.Controllers
                     var deleteResult = _fileService.DeleteImage(oldImage);
                 }
             }
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            _context.Add(product);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
             //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
             //ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
             //return View(product);
@@ -120,36 +115,36 @@ namespace ECommerce.Areas.Admin.Controllers
             /*            if (ModelState.IsValid)
                         {*/
             try
+            {
+                if (product.ImageFile != null)
                 {
-                    if (product.ImageFile != null)
+                    var result = _fileService.SaveImage(product.ImageFile);
+                    if (result.Item1 == 1)
                     {
-                        var result = _fileService.SaveImage(product.ImageFile);
-                        if (result.Item1 == 1)
-                        {
-                            var oldImage = product.Image;
-                            product.Image = "/uploads/" + result.Item2;
-                            var deleteResult = _fileService.DeleteImage(oldImage);
-                        }
-                    }
-                     _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.ProductId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        var oldImage = product.Image;
+                        product.Image = "/uploads/" + result.Item2;
+                        var deleteResult = _fileService.DeleteImage(oldImage);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                _context.Update(product);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductExists(product.ProductId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
             /*}*/
-/*            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
-            ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
-            return View(product);*/
+            /*            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Image", product.CategoryId);
+                        ViewData["SellerId"] = new SelectList(_context.Sellers, "Id", "Id", product.SellerId);
+                        return View(product);*/
         }
 
         // GET: Admin/Products/Delete/5
@@ -186,14 +181,14 @@ namespace ECommerce.Areas.Admin.Controllers
             {
                 _context.Products.Remove(product);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-          return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
+            return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
         }
     }
 }

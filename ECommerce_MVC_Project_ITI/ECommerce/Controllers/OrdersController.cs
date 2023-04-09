@@ -10,7 +10,7 @@ using Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Identity.Models;
 using ECommerce.Models;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.Controllers
 {
@@ -26,11 +26,16 @@ namespace ECommerce.Controllers
         }
 
         // GET: Orders
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Orders.Include(o => o.AppUser);
-            return View(await applicationDbContext.ToListAsync());
+            var user = await _userManager.GetUserAsync(User);
+
+                var applicationDbContext = _context.Orders.Include(o => o.AppUser);
+                return View(await applicationDbContext.ToListAsync());
         }
+          
+        
 
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -54,16 +59,22 @@ namespace ECommerce.Controllers
         // GET: Orders/Create
         public async Task<IActionResult> Create()
         {
+
             var user =  await _userManager.GetUserAsync(User);
 
-            var cart = _context.Carts?.Include(c => c.CartProducts).ThenInclude(p => p.Product).FirstOrDefault(c => c.AppUserId == user.Id);
-
-
+           if(user!=null)
+            { 
+            var cart = _context.Carts?.Include(c => c.CartProducts)!.ThenInclude(p => p.Product)?.FirstOrDefault(c => c.AppUserId == user.Id);
+            
             ViewBag.ProductsOfCart = cart?.CartProducts?.ToList();
             ViewData["ProductsOfCart"] = cart?.CartProducts?.ToList();
-           
             ViewData["AppUserId"] = new SelectList(_context.AppUsers.Where(u=> u.Id==user.Id).Take(1), "Id", "Name");
             return View();
+            }
+
+            else
+                return LocalRedirect("~/Identity/Account/Login");
+
         }
 
         // POST: Orders/Create
@@ -73,7 +84,9 @@ namespace ECommerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int OrderId,string Street, string City, string Country,int PostalCode,decimal Total,string AppUserId )
         {
-            Order order=new();
+            var user = await _userManager.GetUserAsync(User);
+
+                Order order =new();
             if (ModelState.IsValid)
             {
                  order = new Order()
@@ -90,55 +103,69 @@ namespace ECommerce.Controllers
                 _context.SaveChanges();
                 //return RedirectToAction(nameof(Index));
             }
-            var user = await _userManager.GetUserAsync(User);
-            var cart = _context.Carts?.Include(c => c.CartProducts).ThenInclude(p => p.Product).FirstOrDefault(c => c.AppUserId == user.Id);
+            
+            if (user != null)
+            {
 
-            var cartProductsList = cart?.CartProducts?.ToList();
+                var cart = _context.Carts?.Include(c => c.CartProducts).ThenInclude(p => p.Product).FirstOrDefault(c => c.AppUserId == user.Id);
+
+                var cartProductsList = cart?.CartProducts?.ToList();
 
                 decimal sum = 0;
-          if(cartProductsList!=null)
-            {
-                foreach (var cartProduct in cartProductsList)
-            {
-                    order?.OrderProducts?.Add(
-                    new OrderProduct()
+                if (cartProductsList != null)
+                {
+                    foreach (var cartProduct in cartProductsList)
                     {
-                        Quantity = cartProduct.Quantity,
-                        Price= cartProduct.Price,
-                        ProductId= cartProduct.ProductId,
-                        OrderId= cartProduct.ProductId
+                        order?.OrderProducts?.Add(
+                        new OrderProduct()
+                        {
+                            Quantity = cartProduct.Quantity,
+                            Price = cartProduct.Price,
+                            ProductId = cartProduct.ProductId,
+                            OrderId = cartProduct.ProductId
+                        }
+                        );
+                        sum += (cartProduct.Product.Price! * cartProduct.Quantity);
                     }
-                    );
-                    sum += (cartProduct.Product.Price * cartProduct.Quantity);
-            }
 
-            }
+                }
 
-            try
-            {
-                
-                var orderToEdit = _context.Orders
-                    .Where(o => o.AppUserId == user.Id)
-                    .OrderByDescending(o => o.OrderDate)
-                    .FirstOrDefault();
-                if (orderToEdit != null)
-                    orderToEdit.Total = sum;
+                try
+                {
 
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "PayPal");
+                    var orderToEdit = _context.Orders
+                        .Where(o => o.AppUserId == user.Id)
+                        .OrderByDescending(o => o.OrderDate)
+                        .FirstOrDefault();
+                    if (orderToEdit != null)
+                        orderToEdit.Total = sum;
+
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "PayPal");
+                }
+                catch
+                {
+                    return RedirectToAction("Error", "home");
+                }
             }
-            catch
-            {
-                return RedirectToAction("Error", "home");
-            }
-            //ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", order.AppUserId);
-            //return View(order);
+            else
+                return LocalRedirect("~/Identity/Account/Login");
+
+
         }
+
+        [Authorize(Roles = "Admin")]
 
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Orders == null)
+                var user = await _userManager.GetUserAsync(User);
+
+        if (user != null)
+        {
+
+
+                    if (id == null || _context.Orders == null)
             {
                 return NotFound();
             }
@@ -152,14 +179,25 @@ namespace ECommerce.Controllers
             return View(order);
         }
 
+         else
+               return LocalRedirect("~/Identity/Account/Login");
+        }
+
         // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int id, [Bind("OrderId,OrderDate,Street,City,Country,PostalCode,Total,AppUserId")] Order order)
         {
-            if (id != order.OrderId)
+                    var user = await _userManager.GetUserAsync(User);
+
+         if (user != null)
+         {
+
+                        if (id != order.OrderId)
             {
                 return NotFound();
             }
@@ -186,32 +224,59 @@ namespace ECommerce.Controllers
             }
             ViewData["AppUserId"] = new SelectList(_context.AppUsers, "Id", "Id", order.AppUserId);
             return View(order);
+            }
+
+            else
+                return LocalRedirect("~/Identity/Account/Login");
         }
 
-        // GET: Orders/Delete/5
+    
+
+    // GET: Orders/Delete/5
+    [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Orders == null)
+         var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
             {
-                return NotFound();
+
+
+                if (id == null || _context.Orders == null)
+                {
+                    return NotFound();
+                }
+
+                var order = await _context.Orders
+                    .Include(o => o.AppUser)
+                    .FirstOrDefaultAsync(m => m.OrderId == id);
+                if (order == null)
+                {
+                    return NotFound();
+                }
+
+                return View(order);
             }
 
-            var order = await _context.Orders
-                .Include(o => o.AppUser)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
-            if (order == null)
-            {
-                return NotFound();
+            else
+                return LocalRedirect("~/Identity/Account/Login");
             }
 
-            return View(order);
-        }
+        
 
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
+                [Authorize(Roles ="Admin")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+        var user = await _userManager.GetUserAsync(User);
+
+        if (user != null)
+        {
+
             if (_context.Orders == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Orders'  is null.");
@@ -225,6 +290,10 @@ namespace ECommerce.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        else
+           return LocalRedirect("~/Identity/Account/Login");
+         }
 
         private bool OrderExists(int id)
         {

@@ -22,28 +22,24 @@ namespace Identity.Controllers
             this._context = _context; 
         }
 
-        public IActionResult Error()
+        public IActionResult Error(int? statusCode = null)
         {
-            var exceptionHandlerPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            if (exceptionHandlerPathFeature?.Error is FileNotFoundException)
+            if (statusCode.HasValue)
             {
-                // Handle file not found exception
-
+                if (statusCode.Value == 404)
+                {
+                    // return a custom 404 page
+                    return View("Error404");
+                }
+                else
+                {
+                    // handle other HTTP errors
+                    return View("Error");
+                }
             }
-            else if (exceptionHandlerPathFeature?.Path == "/index")
-            {
-                // Handle exceptions from /index route
-            }
 
-            _logger.LogError($"An error occurred: {exceptionHandlerPathFeature?.Error}");
-
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        [Route("Home/Error/404")]
-        public IActionResult Error404()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // handle unhandled exceptions
+            return View("Error");
         }
 
         public IActionResult Index()
@@ -66,8 +62,8 @@ namespace Identity.Controllers
                     maxProductId = _context.Products.Max(p => p.ProductId);
                     randomProductId = rnd.Next(1, maxProductId + 1);
 
-                    Product filteredProducts = lst.Where(P => P.ProductId == randomProductId).FirstOrDefault();
-                    if (filteredProducts == null)
+                    Product filteredProducts = lst.Where(P => P.ProductId == randomProductId).FirstOrDefault()!;
+                    if (filteredProducts == null || randomProducts.Contains(filteredProducts))
                     {
                         i--;
                     }

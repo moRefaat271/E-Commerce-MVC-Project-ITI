@@ -114,10 +114,12 @@ namespace Identity.Areas.Identity.Pages.Account
             if (result.Succeeded)
             {
                 _logger.LogInformation("User with ID '{UserId}' logged in with 2fa.", user.Id);
+               
                 if (returnUrl == "/Cart/AddToCart")
                 {
                     return RedirectToAction("Index", "Products");
                 }
+
                 return LocalRedirect(returnUrl);
             }
             else if (result.IsLockedOut)

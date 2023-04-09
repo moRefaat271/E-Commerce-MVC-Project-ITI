@@ -6,22 +6,15 @@
 @{
     ViewData["Title"] = "Payment Success";
 }
+@{
 
+}
 @model ECommerce.Models.Cart
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <bold>
-                <p class="text-center">Thank you for your payment. Your order has been received and will be processed shortly.</p></bold>
-            <hr>
-           
-        </div>
-    </div>
-</div>
 
-@{
-    if (Model == null)
+
+
+    @if (Model == null)
     {
         <h3 style="text-align:center">Your cart is empty</h3>
     }
@@ -31,6 +24,16 @@
     }
     else
     {
+        <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            
+                <h4 class="text-center">Thank you for your payment. Your order has been received and will be processed shortly.</h4>
+            <hr>
+           
+        </div>
+        </div>
+    </div>
         <main>
             <!--================Cart Area =================-->
             <section class="cart_area">
@@ -40,16 +43,17 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Total</th>                                    </tr>
+                                        <th scope="col"><h5>Product</h5></th>
+                                        <th scope="col"><h5>Price</h5></th>
+                                        <th scope="col"><h5>Quantity</h5></th>
+                                        <th scope="col"><h5>Total</h5></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     @{
                                         float subtotal = 0;
                                     }
-                                    @foreach (var item in Model?.CartProducts)
+                                    @foreach (var item in Model?.CartProducts!)
                                     {
                                         <tr>
                                             <td>
@@ -58,22 +62,22 @@
                                                         <img src="@item?.Product?.Image" alt="" />
                                                     </div>
                                                     <div class="media-body">
-                                                        <p>@item?.Product?.Name</p>
+                                                        <h4>@item?.Product?.Name</h4>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <h5>@item?.Price</h5>
+                                                <h4>@item?.Price</h4>
                                             </td>
                                             <td>
-                                                <label>@item?.Quantity</label>
+                                                <h4>@item?.Quantity</h4>
                                             </td>
                                             <td>
                                                 @{
                                                     float total = (float)item.Price * (int)item.Quantity;
                                                     subtotal += total;
                                                 }
-                                                <h5>@total</h5>
+                                                <h4>@total</h4>
                                             </td>
                                         </tr>
                                     }
@@ -82,10 +86,10 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <h5>Subtotal</h5>
+                                            <h4>Subtotal</h4>
                                         </td>
                                         <td>
-                                            <h5>@subtotal</h5>
+                                            <h4>@subtotal</h4>
                                         </td>
                                     </tr>
 
@@ -100,7 +104,7 @@
     }
 }
 
-@foreach (var item in Model.CartProducts)
+@foreach (var item in Model?.CartProducts!)
 {
     _context.CartProducts.Remove(item);
     _context.SaveChanges();

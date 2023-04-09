@@ -112,42 +112,24 @@ namespace Identity.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(Input.Email);
-
-                if (user != null && await _userManager.CheckPasswordAsync(user, Input.Password))
-                {
-                    //if (!await _userManager.GetTwoFactorEnabledAsync(user))
-                    //{
-                    //    // User has not enabled 2FA, so enable it here before signing in
-                    //    await _userManager.SetTwoFactorEnabledAsync(user, true);
-                    //}
-
-                    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-                
-                    // This doesn't count login failures towards account lockout
+                // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User logged in.");
+
+                  
+
+                    if (returnUrl == "/Cart/AddToCart")
+                    {
+                        return RedirectToAction("Index", "Products");
+                    }
+                    return LocalRedirect(returnUrl);
+                }
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.Succeeded)
-                {
-            if (User.IsInRole("Seller"))
-            {
-                return RedirectToAction("sellerDashboard", "seller");
-            }
-            if (User.IsInRole("Admin"))
-            {
-                return RedirectToAction("AdminDashboard", "Admin");
-            }
-                    _logger.LogInformation("User logged in.");
-                        if (returnUrl == "/Cart/AddToCart")
-                        {
-                            
-                            return RedirectToAction("Index", "Products");
-                        }
-                        
-                        return LocalRedirect(returnUrl);
                 }
                 if (result.IsLockedOut)
                 {
@@ -159,7 +141,8 @@ namespace Identity.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }
-                }
+                
+            
 
             }
 

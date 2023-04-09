@@ -1,16 +1,32 @@
 ﻿@model E_Commerce.Models.Order
-<h2 style="text-align: center">Pay with PayPal</h2>
+@using Identity.Data;
+@using Microsoft.AspNetCore.Identity;
+@inject ApplicationDbContext _context;
+@inject UserManager<AppUser> _userManager;
 
-<button style="    margin-left: 45%;
-    margin-top: 100px;" type="submit" id="paypal-btn"></button>
+
+<style>
+    #paypal-btn:hover {
+        transform: rotate(360deg);
+        transition: transform 0.5s ease-in-out;
+        box-shadow: 0 0 10px #ffd700;
+    }
+</style>
+ <h1 class="text-center mb-4">Click the Button</h1>
+
+<button style="transform: scale(4);    margin-left: 45%;
+    margin-top: 100px; margin-bottom: 100px;" type="submit" id="paypal-btn"></button>
 
 
 
 <script>
     var orderTotal = @Model.Total;
+    ViewData["IsSuccessed"].PaymentSuccess = true;
+    @_context.SaveChanges();
 </script>
 
-@section Scripts{
+@section Scripts
+{
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script>
 
@@ -46,6 +62,7 @@
             onAuthorize: function (data, actions) {
                 actions.payment.execute()
                 var url = '@Url.Action("Success", "PayPal", new {})';
+               
                 window.location.href = url;
             }
 

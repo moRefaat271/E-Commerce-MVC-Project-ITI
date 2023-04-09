@@ -6,6 +6,14 @@
     .cart_inner .table tbody tr td .product_count input{
         padding-left: 0 !important;
     }
+
+    /*.h2 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+    }*/
 </style>
 
     @model ECommerce.Models.Cart
@@ -29,18 +37,18 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Total</th>
+                                        <th scope="col"><h4>Product</h4></th>
+                                        <th scope="col"><h4>Price</h4></th>
+                                        <th scope="col"><h4>Quantity</h4></th>
+                                        <th scope="col"><h4>Total</h4></th>
+                                        <th scope="col"><h4>Total</h4></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @{
                                         float subtotal = 0;
                                     }
-                                    @foreach (var item in Model?.CartProducts)
+                                    @foreach (var item in Model?.CartProducts!)
                                     {
                                         <tr>
                                             <td>
@@ -49,12 +57,12 @@
                                                         <img src="@item?.Product?.Image" alt="" />
                                                     </div>
                                                     <div class="media-body">
-                                                        <p>@item?.Product?.Name</p>
+                                                        <h4>@item?.Product?.Name</h4>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <h5>@item?.Price</h5>
+                                                <h4>@item?.Price</h4>
                                             </td>
                                             <td>
                                                 
@@ -72,7 +80,7 @@
                                                     float total = (float)item.Price * (int) item.Quantity;
                                                     subtotal += total;
                                                 }
-                                                <h5>@total</h5>
+                                                <h4>@total</h4>
                                             </td>
 
                                             <td>
@@ -88,10 +96,10 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <h5>Subtotal</h5>
+                                            <h4>Subtotal</h4>
                                         </td>
                                         <td>
-                                            <h5>@subtotal</h5>
+                                            <h4>@subtotal</h4>
                                         </td>
                                     </tr>
 

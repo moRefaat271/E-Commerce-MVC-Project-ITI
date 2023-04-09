@@ -23,14 +23,19 @@ namespace ECommerce.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             var order =_context.Orders.Where(o => o.AppUserId == user.Id).OrderByDescending(o => o.OrderDate).FirstOrDefault();
-            ViewBag.money = order.Total;
+            ViewData["IsSuccessed"] = order;
             return View(order);
         }
+
         public async Task<IActionResult> Success()
         {
             var user = await _userManager.GetUserAsync(User);
 
-            var cart = _context.Carts?.Include(c => c.CartProducts).ThenInclude(p => p.Product).FirstOrDefault(c => c.AppUserId == user.Id);
+            var cart = _context.Carts?.Include(c => c.CartProducts)!.ThenInclude(p => p.Product).FirstOrDefault(c => c.AppUserId == user.Id);
+            var order = _context.Orders?.Where(o => o.AppUserId == user.Id)
+                        .OrderByDescending(o => o.OrderDate)
+                        .FirstOrDefault();
+            ViewBag.order = order;
             return View("PaymentSuccess", cart);
         }
     }

@@ -35,14 +35,14 @@ namespace Identity
                 .AddGoogle(opt =>
                 {
                     IConfigurationSection GoogleAuthSection = builder.Configuration.GetSection("Authentication:Google");
-                    opt.ClientId = GoogleAuthSection["GoogleId"];
-                    opt.ClientSecret = GoogleAuthSection["GoogleSecret"];
+                    opt.ClientId = GoogleAuthSection["GoogleId"]!;
+                    opt.ClientSecret = GoogleAuthSection["GoogleSecret"]!;
                 })
                 .AddFacebook(opt =>
                 {
                     IConfigurationSection FacebookAuthSection = builder.Configuration.GetSection("Authentication:Facebook");
-                    opt.ClientId = FacebookAuthSection["FacebookId"];
-                    opt.ClientSecret = FacebookAuthSection["FacebookSecret"];
+                    opt.ClientId = FacebookAuthSection["FacebookId"]!;
+                    opt.ClientSecret = FacebookAuthSection["FacebookSecret"]!;
 
                 });
 
@@ -63,7 +63,7 @@ namespace Identity
             {
                 app.UseMigrationsEndPoint();
             }
-            else
+            
             {
                 app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
                 app.UseExceptionHandler("/Home/Error");

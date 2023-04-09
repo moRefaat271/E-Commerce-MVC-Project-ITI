@@ -8,16 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using E_Commerce.Models;
 using Identity.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userMnager;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context,UserManager<AppUser> userMnager)
         {
             _context = context;
+            _userMnager = userMnager;
         }
 
         // GET: Products
@@ -46,6 +49,12 @@ namespace ECommerce.Controllers
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var user=await _userMnager.GetUserAsync(User);
+
+            if(user!=null)
+            {
+
+            
             if (id == null || _context.Products == null)
             {
                 return NotFound();
@@ -61,6 +70,11 @@ namespace ECommerce.Controllers
             }
 
             return View(product);
+            }
+            else
+            return LocalRedirect("~/Identity/Account/Login");
+
+            
         }
 
         // GET: Products/Create

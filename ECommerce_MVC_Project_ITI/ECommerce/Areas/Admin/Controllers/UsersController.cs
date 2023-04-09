@@ -1,12 +1,10 @@
 ﻿using ECommerce.ViewModel;
 using Identity.Data;
-using Identity.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace ECommerce.Areas.Admin.Controllers
 {
@@ -39,7 +37,7 @@ namespace ECommerce.Areas.Admin.Controllers
         {
             // var roles = await _roleManager.Roles.Select(r => new RoleViewModel { RoleID = r.Id, RoleName = r.Name }).ToListAsync();
             var roles = await _roleManager.Roles.ToListAsync();
-            var mmm =await _roleManager.FindByNameAsync("Admin");
+            var mmm = await _roleManager.FindByNameAsync("Admin");
             //ViewData["myRoles"] = new SelectList(roles, "Id", "Name");
             var selectList = new List<SelectListItem>();
             foreach (var role in roles)

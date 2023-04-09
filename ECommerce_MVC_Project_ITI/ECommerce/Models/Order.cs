@@ -29,5 +29,8 @@ namespace E_Commerce.Models
         public AppUser? AppUser { get; set; }
 
         public ICollection<OrderProduct>? OrderProducts { get; set; } = new HashSet<OrderProduct>();
+
+        [NotMapped]
+        public bool? PaymentSuccess { get; set; }
     }
 }

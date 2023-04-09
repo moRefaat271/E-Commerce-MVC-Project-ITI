@@ -25,22 +25,11 @@ namespace ECommerce.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
-            var cart = _context?.Carts?.Include(c => c.CartProducts)
+            var cart = _context?.Carts?.Include(c => c.CartProducts)!
                     .ThenInclude(cp => cp.Product)
-                .FirstOrDefault(c => c.AppUserId == user.Id);
+                .FirstOrDefault(c => c.AppUserId == user.Id!);
 
-            //if (cart == null)
-            //{
-            //    return NotFound();
-            //}
-            //var cart = _context.Carts.FirstOrDefault(c => c.AppUserId == user.Id);
-            //var prdsid = _context.CartProducts.Where(cp => cp.CartId == cart.Id).Select(cp=>cp.ProductId).ToList() ;
-            //var prdList = new List<Product>();
-
-            //foreach(var id in prdsid)
-            //{
-            //    prdList.Add(_context.Products.Find(id));
-            //}
+        
 
             return View(cart);
         }
@@ -56,7 +45,7 @@ namespace ECommerce.Controllers
 
             var cart = _context.Carts
                 .Include(c => c.CartProducts)
-                .FirstOrDefault(c => c.AppUserId == user.Id);
+                .FirstOrDefault(c => c.AppUserId == user.Id!);
 
             if (cart == null)
             {

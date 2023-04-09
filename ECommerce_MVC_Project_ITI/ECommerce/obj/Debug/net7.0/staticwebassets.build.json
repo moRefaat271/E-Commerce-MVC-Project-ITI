@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "C35L5MDxkEZVfI+MEWY3rhn9FWWu0XndXHcXktSgCYQ=",
+  "Hash": "YvusrBZiEbhKMoGVxvrbn2zZvK2jfyeTSqO4wCGpCrc=",
   "Source": "ECommerce",
   "BasePath": "_content/ECommerce",
   "Mode": "Default",
@@ -8007,6 +8007,23 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\3d8ef066-395f-4a81-8f22-65e690b176ba.jpg"
     },
     {
+      "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\474d7463-2a0a-4cfb-8e72-5f3077421c18.jpg",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "Uploads/474d7463-2a0a-4cfb-8e72-5f3077421c18.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\474d7463-2a0a-4cfb-8e72-5f3077421c18.jpg"
+    },
+    {
       "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\5732719b-182b-4c6d-ad7d-716e51bedf17.jpg",
       "SourceId": "ECommerce",
       "SourceType": "Discovered",
@@ -8056,6 +8073,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\5ccce18c-8e96-43b2-888a-cb7787e9ebb0.jpg"
+    },
+    {
+      "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\5f05db01-6eed-4c48-9341-86ff1cf3ec43.jpg",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "Uploads/5f05db01-6eed-4c48-9341-86ff1cf3ec43.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\5f05db01-6eed-4c48-9341-86ff1cf3ec43.jpg"
     },
     {
       "Identity": "D:\\ITI\\Project\\E-Commerce MVC Project-ITI\\ECommerce_MVC_Project_ITI\\ECommerce\\wwwroot\\Uploads\\6fc7ca1c-bb47-4651-ae78-528df46a69d2.jpg",

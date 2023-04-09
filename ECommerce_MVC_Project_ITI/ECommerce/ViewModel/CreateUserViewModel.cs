@@ -6,16 +6,26 @@ namespace ECommerce.ViewModel
     public class CreateUserViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
-        public string? Name { get; set; }
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
         [Required]
-        [EmailAddress]
         [Display(Name = "Email")]
-        public string? Email { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
+
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        public string? Password { get; set; }
+        public string Password { get; set; }
+
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [DataType(DataType.Password)]
+        public string ConfirmPassword { get; set; }
+        [Required]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
         public RoleViewModel? Role { get; set; }
     }
 }
